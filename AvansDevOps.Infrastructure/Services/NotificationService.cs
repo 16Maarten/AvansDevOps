@@ -14,10 +14,6 @@ public class NotificationService<T> : ISubscriber<T>
         }
     }
 
-    public NotificationService(INotifier<T> notifier)
-    {
-        _notifier = notifier;
-    }
     public void Update(T notificationObject, string message)
     {
         _notifier.SendNotification(notificationObject, message);
