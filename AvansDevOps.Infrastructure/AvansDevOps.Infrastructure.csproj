@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AvansDevOps.DomainServices\AvansDevOps.DomainServices.csproj" />
+  </ItemGroup>
+
 </Project>
