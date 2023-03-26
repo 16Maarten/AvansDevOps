@@ -1,8 +1,8 @@
 ﻿using AvansDevOps.DomainServices;
 
-namespace AvansDevOps.Domain;
+namespace AvansDevOps.Infrastructure.Services;
 
-public class Publisher<T>
+public class PublisherService<T>
 {
     private List<ISubscriber<T>> _subscribers = new List<ISubscriber<T>>();
 

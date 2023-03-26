@@ -1,15 +1,15 @@
-﻿using System.Reflection.Metadata;
+﻿using AvansDevOps.Infrastructure.Services;
 
 namespace AvansDevOps.Domain.AbstractClasses;
 
 public abstract class Pipeline
 {
-    private Publisher<Pipeline> _publisher;
+    private PublisherService<Pipeline> _publisher;
     //private User _scrumMaster;
 
     public Pipeline()
     {
-        _publisher = new Publisher<Pipeline>();
+        _publisher = new PublisherService<Pipeline>();
         //_scrumMaster = user;
     }
     public bool TemplateMethod()
