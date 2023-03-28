@@ -1,8 +1,8 @@
 ﻿using AvansDevOps.App.Domain;
 
-namespace AvansDevOps.App.Infrastructure.Factories.DeveloperFactory;
+namespace AvansDevOps.App.DomainServices.FactoryInterfaces;
 
-public interface IDAODeveloperFactory
+public interface IDAODeveloper
 {
     bool Create(Developer developer);
     bool Update(Developer developer);

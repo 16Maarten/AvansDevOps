@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using AvansDevOps.Domain;
+using AvansDevOps.App.Infrastructure.Services;
 
 Console.WriteLine("Hello, World!");
 
-var publisher = new Publisher<string>();
+var publisher = new PublisherService<string>();

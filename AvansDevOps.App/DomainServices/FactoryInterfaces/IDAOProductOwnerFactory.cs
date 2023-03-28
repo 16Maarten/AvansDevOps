@@ -1,8 +1,8 @@
 ﻿using AvansDevOps.App.Domain;
 
-namespace AvansDevOps.App.Infrastructure.Factories.ProductOwnerFactory;
+namespace AvansDevOps.App.DomainServices.FactoryInterfaces;
 
-public interface IDAOProductOwner
+public interface IDAOProductOwnerFactory
 {
     bool Create(ProductOwner productOwner);
     bool Update(ProductOwner productOwner);

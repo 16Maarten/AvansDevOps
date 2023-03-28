@@ -1,6 +1,6 @@
 ﻿using AvansDevOps.App.Domain;
 
-namespace AvansDevOps.App.Infrastructure.Factories.ScrumMasterFactory;
+namespace AvansDevOps.App.DomainServices.FactoryInterfaces;
 
 public interface IDAOScrumMasterFactory
 {
