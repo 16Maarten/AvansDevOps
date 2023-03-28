@@ -1,6 +1,6 @@
 ﻿using AvansDevOps.App.Infrastructure.Services;
 
-namespace AvansDevOps.App.Domain.AbstractClasses;
+namespace AvansDevOps.App.Domain.Pipeline;
 
 public abstract class Pipeline
 {

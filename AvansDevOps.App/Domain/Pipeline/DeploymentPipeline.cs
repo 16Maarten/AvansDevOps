@@ -1,6 +1,4 @@
-﻿using AvansDevOps.App.Domain.AbstractClasses;
-
-namespace AvansDevOps.App.Domain;
+﻿namespace AvansDevOps.App.Domain.Pipeline;
 
 public class DeploymentPipeline : Pipeline
 {
