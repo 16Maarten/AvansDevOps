@@ -1,4 +1,4 @@
-﻿namespace AvansDevOps.App.Domain;
+﻿namespace AvansDevOps.App.Domain.ProjectHierarchy;
 
 public abstract class Sprint
 {

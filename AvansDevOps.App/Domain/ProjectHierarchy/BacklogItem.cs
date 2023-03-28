@@ -1,8 +1,9 @@
 ﻿using AvansDevOps.App.Domain.States;
+using AvansDevOps.App.Domain.Users;
 
-namespace AvansDevOps.App.Domain;
+namespace AvansDevOps.App.Domain.ProjectHierarchy;
 
-public class Activity
+public class BacklogItem
 {
     private string _title { get; set; }
     private string _description { get; set; }
@@ -13,30 +14,30 @@ public class Activity
 
     public void ToTodo()
     {
-        this._state = _state.StateToDo();
+        _state = _state.StateToDo();
     }
     public void ToDoing()
     {
-        this._state = _state.StateDoing();
+        _state = _state.StateDoing();
     }
 
     public void ToReadyForTesting()
     {
-        this._state = _state.StateReadyForTesting();
+        _state = _state.StateReadyForTesting();
     }
 
     public void ToTesting()
     {
-        this._state = _state.StateTesting();
+        _state = _state.StateTesting();
     }
 
     public void ToTested()
     {
-        this._state = _state.StateTested();
+        _state = _state.StateTested();
     }
     public void ToDone()
     {
         // TODO Check of alle activiteiten op done staan
-        this._state = _state.StateDone();
+        _state = _state.StateDone();
     }
 }

@@ -1,4 +1,4 @@
-﻿using AvansDevOps.App.Domain;
+﻿using AvansDevOps.App.Domain.Users;
 
 namespace AvansDevOps.App.DomainServices.FactoryInterfaces;
 
