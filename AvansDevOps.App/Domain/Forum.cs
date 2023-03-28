@@ -17,10 +17,12 @@ public class Forum
     public void AddThread(Thread thread)
     {
         _threads.Add(thread);
+        thread.Person.Threads.Add(thread);
     }
 
     public void RemoveThread(Thread thread)
     {
+        thread.Person.Threads.Remove(thread);
         _threads.Remove(thread);
     }
 

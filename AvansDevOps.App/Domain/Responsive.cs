@@ -10,6 +10,8 @@ public abstract class Responsive
     private DateTime dateTime = DateTime.Now;
     private List<Reply> _replies = new List<Reply>();
 
+    public Person Person { get { return _person; } set { _person = value; } }
+
     public Responsive(string message, Person person)
     {
         _person = person;
@@ -19,15 +21,18 @@ public abstract class Responsive
     public void AddReply(Reply reply)
     {
         _replies.Add(reply);
+        reply._person.Replies.Add(reply);
     }
 
     public void RemoveReply(Reply reply)
     {
+        reply._person.Replies.Remove(reply);
         _replies.Remove(reply);
     }
 
-    public virtual string ToStringWithoutNested() {
-        return $"   {_message}\n\n {_person} - {dateTime.ToLongDateString()}";
+    public virtual string ToStringWithoutNested()
+    {
+        return $"   {_message}\n\n   {_person.Name} - {dateTime.ToLongTimeString()} {dateTime.ToLongDateString()}\n   -------";
     }
 
     public override string ToString()
@@ -35,9 +40,9 @@ public abstract class Responsive
         var nestedReplies = new StringBuilder();
         foreach (Reply reply in _replies)
         {
-            nestedReplies.AppendLine($"   Reply to {_person.Name} -> { reply.ToString()}");
+            nestedReplies.AppendLine($"   Reply to {_person.Name} -> {reply.ToString()}");
         }
 
-        return $"   {_message}\n\n   ({_person.Name} - {dateTime.ToLongDateString()})\n   -------\n{nestedReplies.ToString()}";
+        return $"   {_message}\n\n   ({_person.Name} - {dateTime.ToLongTimeString()} {dateTime.ToLongDateString()})\n   -------\n{nestedReplies.ToString()}";
     }
 }

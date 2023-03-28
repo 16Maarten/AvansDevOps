@@ -7,8 +7,8 @@ public abstract class Person
     public string Name { get; private set; }
     public string Email { get; private set; }
     public string SlackId { get; private set; }
-    public List<Thread> Threads { get; private set; }
-    public List<Reply> Replies { get; private set; }
+    public List<Thread> Threads { get; private set; } = new List<Thread>();
+    public List<Reply> Replies { get; private set; } = new List<Reply>();
 
     public Person(string name)
     {
@@ -31,7 +31,7 @@ public abstract class Person
         var nestedReplies = new StringBuilder();
         foreach (Reply reply in Replies)
         {
-            nestedReplies.AppendLine(reply.ToString());
+            nestedReplies.AppendLine(reply.ToStringWithoutNested());
         }
 
         return nestedReplies.ToString();

@@ -7,7 +7,7 @@ public class Thread : Responsive
     private string _title;
 
     public Thread(string title, string message, Person person) : base(message, person) {
-        _title = title;        
+        _title = title;
     }
 
     public override string ToStringWithoutNested()
