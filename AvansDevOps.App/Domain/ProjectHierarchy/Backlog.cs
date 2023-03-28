@@ -2,7 +2,4 @@
 
 namespace AvansDevOps.App.Domain.ProjectHierarchy;
 
-public class Backlog
-{
-
-}
+public class Backlog { }
