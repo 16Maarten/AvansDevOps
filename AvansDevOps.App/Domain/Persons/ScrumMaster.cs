@@ -1,4 +1,4 @@
-﻿namespace AvansDevOps.App.Domain;
+﻿namespace AvansDevOps.App.Domain.Users;
 
 public class ScrumMaster : Person
 {
