@@ -4,8 +4,8 @@ using AvansDevOps.App.Domain.Users;
 using AvansDevOps.App.Infrastructure.Services;
 using Thread = AvansDevOps.App.Domain.Thread;
 
-var publisher = new PublisherService<string>();
-var report = new Report("");
+//---START FORUM---
+Console.WriteLine("------------START FORUM------------");
 
 var forum = new Forum("Design", "This is the design forum");
 var user1 = new Developer("Mo");
@@ -31,4 +31,7 @@ Console.WriteLine("User 1 REPLIES:");
 Console.WriteLine(user1.RepliesToString());
 Console.WriteLine("User2 REPLIES:");
 Console.WriteLine(user2.RepliesToString());
+
+Console.WriteLine("------------END FORUM------------");
+//---END FORUM---
 
