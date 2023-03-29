@@ -1,4 +1,4 @@
-﻿using AvansDevOps.App.Domain.States;
+﻿using AvansDevOps.App.Domain.WorkItemStates;
 
 namespace AvansDevOps.App.Domain.ProjectHierarchy;
 

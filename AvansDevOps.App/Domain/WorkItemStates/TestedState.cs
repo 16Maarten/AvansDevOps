@@ -1,36 +1,36 @@
-﻿namespace AvansDevOps.App.Domain.States;
+﻿namespace AvansDevOps.App.Domain.WorkItemStates;
 
 public class TestedState : IBacklogItemState
 {
-    public IBacklogItemState StateDoing()
+    public IBacklogItemState ToStateDoing()
     {
         Console.WriteLine("Item kan niet naar status doing");
         return new TestedState();
     }
 
-    public IBacklogItemState StateDone()
+    public IBacklogItemState ToStateDone()
     {
         return new DoneState();
     }
 
-    public IBacklogItemState StateReadyForTesting()
+    public IBacklogItemState ToStateReadyForTesting()
     {
         return new ReadyForTestingState();
     }
 
-    public IBacklogItemState StateTested()
+    public IBacklogItemState ToStateTested()
     {
         Console.WriteLine("Item is al status tested");
         return new TestedState();
     }
 
-    public IBacklogItemState StateTesting()
+    public IBacklogItemState ToStateTesting()
     {
         Console.WriteLine("Item kan niet naar status testing");
         return new TestedState();
     }
 
-    public IBacklogItemState StateToDo()
+    public IBacklogItemState ToStateToDo()
     {
         return new ToDoState();
     }
