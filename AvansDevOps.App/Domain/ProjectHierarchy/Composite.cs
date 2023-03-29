@@ -2,33 +2,38 @@
 
 namespace AvansDevOps.App.Domain.ProjectHierarchy;
 
-public abstract class Composite : IComponent
+public abstract class Composite : Component
 {
-    private List<IComponent> parts;
+    private List<Component> parts;
 
     public Composite()
     {
-        parts = new List<IComponent>();
+        parts = new List<Component>();
     }
 
-    public IComponent getComponent(int i)
+    public Component GetComponent(int i)
     {
         return parts.ElementAt(i);
     }
 
-    public void addComponent(IComponent comp)
+    public void AddComponent(Component comp)
     {
         parts.Add(comp);
     }
 
-    public void removeComponent(IComponent comp)
+    public void RemoveComponent(Component comp)
     {
         parts.Remove(comp);
     }
 
-    public void AcceptVisitor(Visitor visitor)
+    public List<Component> GetChildren()
     {
-        foreach (IComponent component in parts)
+        return parts;
+    }
+
+    public override void AcceptVisitor(Visitor visitor)
+    {
+        foreach (Component component in parts)
         {
             component.AcceptVisitor(visitor);
         }

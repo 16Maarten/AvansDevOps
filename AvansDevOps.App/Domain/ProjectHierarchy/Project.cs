@@ -1,17 +1,20 @@
-﻿using AvansDevOps.App.Infrastructure.Visitors;
+﻿using AvansDevOps.App.Domain.Users;
+using AvansDevOps.App.Infrastructure.Visitors;
 
 namespace AvansDevOps.App.Domain.ProjectHierarchy;
 
 public class Project : Composite
 {
-    private string _name;
+    public string Name { get; set; }
+    public ProductOwner ProductOwner { get; set; }
 
-    public Project(string name)
+    public Project(string name, ProductOwner productOwner)
     {
-        _name = name;
+        Name = name;
+        ProductOwner = productOwner;
     }
 
-    public void AcceptVisitor(Visitor visitor)
+    public override void AcceptVisitor(Visitor visitor)
     {
         visitor.VisitProject(this);
         base.AcceptVisitor(visitor);

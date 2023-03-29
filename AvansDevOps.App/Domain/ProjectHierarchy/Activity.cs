@@ -5,14 +5,14 @@ using AvansDevOps.App.Domain.GitStates;
 
 namespace AvansDevOps.App.Domain.ProjectHierarchy;
 
-public class Activity : IComponent, IWorkItem
+public class Activity : Component, IWorkItem
 {
-    private string _title { get; set; }
-    private string _description { get; set; }
-    private Person _developer { get; set; }
-    private Person _tester { get; set; }
-    private int _storyPoints { get; set; }
-    private IBacklogItemState _sprintBoardState { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public Person Developer { get; set; }
+    public Person Tester { get; set; }
+    public int StoryPoints { get; set; }
+    public IBacklogItemState SprintBoardState { get; set; }
     private GitState _gitState = new NoGitState();
     private string _branch = "main";
 
@@ -25,46 +25,46 @@ public class Activity : IComponent, IWorkItem
         IBacklogItemState state
     )
     {
-        _title = title;
-        _description = description;
-        _developer = developer;
-        _tester = tester;
-        _storyPoints = storyPoints;
-        _sprintBoardState = state;
+        Title = title;
+        Description = description;
+        Developer = developer;
+        Tester = tester;
+        StoryPoints = storyPoints;
+        SprintBoardState = state;
     }
 
     public void ToTodo()
     {
-        _sprintBoardState = _sprintBoardState.ToStateToDo();
+        SprintBoardState = SprintBoardState.ToStateToDo();
     }
 
     public void ToDoing()
     {
-        _sprintBoardState = _sprintBoardState.ToStateDoing();
+        SprintBoardState = SprintBoardState.ToStateDoing();
     }
 
     public void ToReadyForTesting()
     {
-        _sprintBoardState = _sprintBoardState.ToStateReadyForTesting();
+        SprintBoardState = SprintBoardState.ToStateReadyForTesting();
     }
 
     public void ToTesting()
     {
-        _sprintBoardState = _sprintBoardState.ToStateTesting();
+        SprintBoardState = SprintBoardState.ToStateTesting();
     }
 
     public void ToTested()
     {
-        _sprintBoardState = _sprintBoardState.ToStateTested();
+        SprintBoardState = SprintBoardState.ToStateTested();
     }
 
     public void ToDone()
     {
         // TODO Check of alle activiteiten op done staan
-        _sprintBoardState = _sprintBoardState.ToStateDone();
+        SprintBoardState = SprintBoardState.ToStateDone();
     }
 
-    public void AcceptVisitor(Visitor visitor)
+    public override void AcceptVisitor(Visitor visitor)
     {
         visitor.VisitActivity(this);
     }
@@ -86,14 +86,15 @@ public class Activity : IComponent, IWorkItem
 
     public void GitPush()
     {
-        _gitState = _gitState.ToStateNoGitByPush(_title, _branch);
+        _gitState = _gitState.ToStateNoGitByPush(Title, _branch);
     }
 
     public void GitBranchTo(string branch)
     {
         var stateTuple = _gitState.SwitchBranch(branch);
         _gitState = stateTuple.Item1;
-        if (stateTuple.Item2 != null) _branch = stateTuple.Item2!;
+        if (stateTuple.Item2 != null)
+            _branch = stateTuple.Item2!;
     }
 
     public string GetBranch()
