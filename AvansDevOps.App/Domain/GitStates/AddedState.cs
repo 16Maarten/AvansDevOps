@@ -28,7 +28,7 @@ public class AddedState : GitState
         return new CommittedState(base._addedCommits);
     }
 
-    public override GitState ToStateNoGitByPush(string workItem, string branch)
+    public override GitState ToStateNoGitByPush(string workItemTitle, string branch)
     {
         Console.WriteLine("Change cannot be pushed. Please commit last added change first.");
         return this;

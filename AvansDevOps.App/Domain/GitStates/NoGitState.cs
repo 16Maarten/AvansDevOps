@@ -27,11 +27,11 @@ public class NoGitState : GitState
         return new NoGitState();
     }
 
-    public override GitState ToStateNoGitByPush(string workItem, string branch)
+    public override GitState ToStateNoGitByPush(string workItemTitle, string branch)
     {
         if (base._addedCommits.Count() > 0)
         {
-            PushChanges(workItem, branch);
+            PushChanges(workItemTitle, branch);
         }
 
         Console.WriteLine("Change cannot be pushed. Please add and commit first.");

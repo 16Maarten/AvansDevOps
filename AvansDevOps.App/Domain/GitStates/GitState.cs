@@ -28,7 +28,7 @@ public abstract class GitState
     public abstract GitState ToStateNoGit();
     public abstract GitState ToStateAdded(string codeSnippet);
     public abstract GitState ToStateCommitted(string commitMessage);
-    public abstract GitState ToStateNoGitByPush(string workItem, string branch);
+    public abstract GitState ToStateNoGitByPush(string workItemTitle, string branch);
     public abstract (GitState, string?) SwitchBranch(string branch);
 
     public void PushChanges(string workItem, string branch)

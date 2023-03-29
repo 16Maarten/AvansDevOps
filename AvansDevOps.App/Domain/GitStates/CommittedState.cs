@@ -26,9 +26,9 @@ public class CommittedState : GitState
         return this;
     }
 
-    public override GitState ToStateNoGitByPush(string workItem, string branch)
+    public override GitState ToStateNoGitByPush(string workItemTitle, string branch)
     {
-        PushChanges(workItem, branch);
+        PushChanges(workItemTitle, branch);
         return new NoGitState();
     }
 
