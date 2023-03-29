@@ -1,4 +1,6 @@
 ﻿using AvansDevOps.App.Domain.ProjectHierarchy;
+using AvansDevOps.App.Domain.Users;
+using AvansDevOps.App.Infrastructure.Visitors;
 
 namespace AvansDevOps.App.Domain;
 
@@ -9,7 +11,8 @@ public class ReleaseSprint : Sprint
         DateTime startDate,
         DateTime endDate,
         Status status,
-        Pipeline.Pipeline pipeline
+        ScrumMaster scrumMaster,
+        ICollection<Developer> developers
     )
-        : base(name, startDate, endDate, status, pipeline) { }
+        : base(name, startDate, endDate, status, scrumMaster, developers) { }
 }

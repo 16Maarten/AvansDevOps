@@ -2,7 +2,7 @@
 
 namespace AvansDevOps.App.Domain.ProjectHierarchy;
 
-public interface IComponent
+public abstract class Component
 {
     public abstract void AcceptVisitor(Visitor visitor);
 }
