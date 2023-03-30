@@ -1,9 +1,11 @@
-﻿namespace AvansDevOps.App.Infrastructure.Notifiers;
+﻿using AvansDevOps.App.Domain.Users;
 
-public class OutlookNotifier<T>
+namespace AvansDevOps.App.Infrastructure.Notifiers;
+
+public class OutlookNotifier
 {
-    public void EmailSendOut(T notificationObject, string message)
+    public void EmailSendOut(string message, Person user)
     {
-        Console.WriteLine(message);
+        Console.WriteLine($"Send email by Outlook library with email:: {user.Email} | Message: {message}");
     }
 }

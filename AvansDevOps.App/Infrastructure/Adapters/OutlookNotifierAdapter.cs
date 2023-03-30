@@ -1,13 +1,14 @@
-﻿using AvansDevOps.App.DomainServices;
+﻿using AvansDevOps.App.Domain.Users;
+using AvansDevOps.App.DomainServices;
 using AvansDevOps.App.Infrastructure.Notifiers;
 
 namespace AvansDevOps.App.Infrastructure.Adapters;
 
-public abstract class OutlookNotifierAdapter<T> : INotifier<T>
+public class OutlookNotifierAdapter : INotifier
 {
-    private OutlookNotifier<T> _notifier = new OutlookNotifier<T>();
-    public void SendNotification(T notificationObject, string message)
+    private OutlookNotifier _notifier = new OutlookNotifier();
+    public void SendNotification(string message, Person user)
     {
-        _notifier.EmailSendOut(notificationObject, message);
+        _notifier.EmailSendOut(message, user);
     }
 }

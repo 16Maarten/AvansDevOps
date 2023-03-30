@@ -1,6 +1,8 @@
-﻿namespace AvansDevOps.App.DomainServices;
+﻿using AvansDevOps.App.Domain.Users;
 
-public interface INotifier<T>
+namespace AvansDevOps.App.DomainServices;
+
+public interface INotifier
 {
-    void SendNotification(T notificationObject, string message);
+    void SendNotification(string message, Person user);
 }

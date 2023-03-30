@@ -1,15 +1,15 @@
 ﻿using AvansDevOps.App.Infrastructure.Services;
 
-namespace AvansDevOps.App.Domain.Pipeline;
+namespace AvansDevOps.App.Domain.Pipelines;
 
 public abstract class Pipeline
 {
-    private PublisherService<Pipeline> _publisher;
+    private PublisherService _publisher;
     //private User _scrumMaster;
 
     public Pipeline()
     {
-        _publisher = new PublisherService<Pipeline>();
+        _publisher = new PublisherService();
         //_scrumMaster = user;
     }
     public bool TemplateMethod()

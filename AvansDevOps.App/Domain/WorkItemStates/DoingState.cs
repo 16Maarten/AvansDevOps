@@ -1,39 +1,42 @@
-﻿namespace AvansDevOps.App.Domain.WorkItemStates;
+﻿using AvansDevOps.App.Domain.Users;
 
-public class DoingState : IBacklogItemState
+namespace AvansDevOps.App.Domain.WorkItemStates;
+
+public class DoingState : BacklogItemState
 {
-    public IBacklogItemState ToStateDoing()
+    public override BacklogItemState ToStateToDo(string itemTile, Person scrumMaster)
+    {
+        Console.WriteLine("Item kan niet naar status todo");
+        return new DoingState();
+    }
+
+    public override BacklogItemState ToStateDoing()
     {
         Console.WriteLine("Item is al status doing");
         return new DoingState();
     }
 
-    public IBacklogItemState ToStateDone()
+    public override BacklogItemState ToStateReadyForTesting(string itemTile, Person tester)
     {
-        Console.WriteLine("Item kan niet naar status done");
-        return new DoingState();
-    }
-
-    public IBacklogItemState ToStateReadyForTesting()
-    {
+        _publisherService.NotifyObservers($"Item {itemTile} is ready for testing", tester);
         return new ReadyForTestingState();
     }
 
-    public IBacklogItemState ToStateTested()
-    {
-        Console.WriteLine("Item kan niet naar status tested");
-        return new DoingState();
-    }
-
-    public IBacklogItemState ToStateTesting()
+    public override BacklogItemState ToStateTesting()
     {
         Console.WriteLine("Item kan niet naar status testing");
         return new DoingState();
     }
 
-    public IBacklogItemState ToStateToDo()
+    public override BacklogItemState ToStateTested()
     {
-        Console.WriteLine("Item kan niet naar status todo");
+        Console.WriteLine("Item kan niet naar status tested");
+        return new DoingState();
+    }
+
+    public override BacklogItemState ToStateDone()
+    {
+        Console.WriteLine("Item kan niet naar status done");
         return new DoingState();
     }
 }

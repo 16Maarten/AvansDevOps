@@ -1,6 +1,4 @@
-﻿using AvansDevOps.App.Domain.WorkItemStates;
-
-namespace AvansDevOps.App.Domain.GitStates;
+﻿namespace AvansDevOps.App.Domain.GitStates;
 
 public class CommittedState : GitState
 {
@@ -21,7 +19,7 @@ public class CommittedState : GitState
 
     public override GitState ToStateCommitted(string commitMessage)
     {
-        Console.WriteLine($"Changes are already committed."); 
+        Console.WriteLine($"Changes are already committed.");
         Console.WriteLine($"Commits:\n{GetCommittedChanges()}");
         return this;
     }
