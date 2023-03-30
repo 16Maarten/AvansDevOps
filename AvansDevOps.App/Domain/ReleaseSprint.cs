@@ -7,12 +7,12 @@ namespace AvansDevOps.App.Domain;
 public class ReleaseSprint : Sprint
 {
     public ReleaseSprint(
+        int id,
         string name,
         DateTime startDate,
         DateTime endDate,
-        Status status,
         ScrumMaster scrumMaster,
         ICollection<Developer> developers
     )
-        : base(name, startDate, endDate, status, scrumMaster, developers) { }
+        : base(id, name, startDate, endDate, scrumMaster, developers) { }
 }
