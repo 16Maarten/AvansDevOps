@@ -9,10 +9,25 @@ public abstract class Person
     public string SlackId { get; private set; }
     public List<Thread> Threads { get; private set; } = new List<Thread>();
     public List<Reply> Replies { get; private set; } = new List<Reply>();
+    public List<string> ContactPreferences { get; private set; } = new List<string>() { "Email", "Slack" };
 
-    public Person(string name)
+    public Person(string name) { { Name = name; } }
+
+    public Person(string name, string email, string slackId)
     {
-        this.Name = name;
+        Name = name;
+        Email = email;
+        SlackId = slackId;
+    }
+
+    public void AddContactPreference(string contactPreference)
+    {
+        ContactPreferences.Add(contactPreference);
+    }
+
+    public void RemoveContactPreference(string contactPreference)
+    {
+        ContactPreferences.Remove(contactPreference);
     }
 
     public string ThreadsToString()

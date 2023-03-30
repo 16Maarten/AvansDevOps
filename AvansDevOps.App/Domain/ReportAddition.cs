@@ -6,8 +6,8 @@ public class ReportAddition
 {
     private string _companyName { get; set; }
     private string _projectName { get; set; }
-    private string _version{ get; set; }
-    private Image _logo{ get; set; }
+    private string _version { get; set; }
+    private Image _logo { get; set; }
     private DateTime _date { get; set; }
 
     public ReportAddition(string companyName, string projectName, string version, Image logo, DateTime date)
@@ -21,6 +21,6 @@ public class ReportAddition
 
     public override string ToString()
     {
-        return $"{_companyName} - {_projectName} - {_version} - {_logo.ToString()} - {_date.ToLocalTime()}"; 
+        return $"{_companyName} - {_projectName} - {_version} - {_logo.ToString()} - {_date.ToLocalTime()}";
     }
 }

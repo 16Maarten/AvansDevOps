@@ -1,21 +1,30 @@
-﻿using AvansDevOps.App.DomainServices;
+﻿using AvansDevOps.App.Domain.Users;
+using AvansDevOps.App.DomainServices;
+using AvansDevOps.App.Infrastructure.Adapters;
+using AvansDevOps.App.Infrastructure.Notifiers;
 
 namespace AvansDevOps.App.Infrastructure.Services;
 
-public class NotificationService<T> : ISubscriber<T>
+public class NotificationService : ISubscriber
 {
-    private INotifier<T> _notifier { get; set; }
-    public INotifier<T> Notifier
-    {
-        get { return _notifier; }
-        set
-        {
-            _notifier = value;
-        }
-    }
+    private INotifier _notifier { get; set; }
 
-    public void Update(T notificationObject, string message)
+    public void Update(string message, Person[] userList)
     {
-        _notifier.SendNotification(notificationObject, message);
+        foreach (var user in userList)
+        {
+            if (user.ContactPreferences.Contains("Slack"))
+            {
+                _notifier = new SlackNotifier();
+                _notifier.SendNotification(message, user);
+            }
+
+            if (user.ContactPreferences.Contains("Email"))
+            {
+
+                _notifier = new OutlookNotifierAdapter();
+                _notifier.SendNotification(message, user);
+            }
+        }
     }
 }

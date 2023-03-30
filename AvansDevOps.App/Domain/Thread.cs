@@ -8,7 +8,8 @@ public class Thread : Responsive
     private string _title;
     private BacklogItem _backlogItem;
 
-    public Thread(string title, string message, Person person) : base(message, person) {
+    public Thread(string title, string message, Person person) : base(message, person)
+    {
         _title = title;
     }
 
