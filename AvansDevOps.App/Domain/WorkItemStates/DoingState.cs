@@ -18,7 +18,7 @@ public class DoingState : BacklogItemState
 
     public override BacklogItemState ToStateReadyForTesting(string itemTile, Person tester)
     {
-        _publisherService.NotifyObservers($"Item {itemTile} is ready for testing", tester);
+        PublisherService.NotifyObservers($"Item {itemTile} is ready for testing", tester);
         return new ReadyForTestingState();
     }
 

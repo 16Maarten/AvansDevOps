@@ -29,7 +29,7 @@ public class BacklogItem : Composite, IWorkItem
     public void ToTodo()
     {
         //Voeg ScrumMaster ipv Tester toe aan notificatie-ontvangers
-        SprintBoardState = SprintBoardState.ToStateToDo(Title, Tester);
+        SprintBoardState = SprintBoardState.ToStateToDo(Title, ((Sprint)this.GetParent()).ScrumMaster);
     }
 
     public void ToDoing()

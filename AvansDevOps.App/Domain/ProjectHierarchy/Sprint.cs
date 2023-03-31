@@ -14,8 +14,9 @@ public abstract class Sprint : Composite
     public Status Status { get; set; } = Status.Open;
     public ScrumMaster ScrumMaster { get; set; }
     public ICollection<Developer> Developers { get; set; }
-    private Pipeline _pipeline { get; set; }
-    private PublisherService _publisherService = new PublisherService();
+    private Pipeline _pipeline { get; set; } = new TestPipeline();
+    public PublisherService PublisherService = new PublisherService();
+    private bool PipelineRunning = false;
 
     public Sprint(
         int id,
@@ -32,7 +33,7 @@ public abstract class Sprint : Composite
         EndDate = endDate;
         ScrumMaster = scrumMaster;
         Developers = developers;
-        _publisherService.AddObserver(new NotificationService());
+        PublisherService.AddObserver(new NotificationService());
     }
 
     public override void AcceptVisitor(Visitor visitor)
@@ -41,16 +42,27 @@ public abstract class Sprint : Composite
         base.AcceptVisitor(visitor);
     }
 
-    public void CancelRelease()
+    public void SetPipeLine(string pipeline)
     {
-        Status = Status.Cancelled;
-        //Voeg ProductOwner toe aan notificatie-ontvangers
-        _publisherService.NotifyObservers($"Release of sprint {Name} is cancelled", ScrumMaster);
+        if (!PipelineRunning)
+        {
+            if (pipeline == "deploy") _pipeline = new DeploymentPipeline();
+            else if (pipeline == "test") _pipeline = new TestPipeline();
+            else throw new Exception("Pipeline not found");
+        }
     }
+
+    public void RunPipeline()
+    {
+        PipelineRunning = true;
+        if (_pipeline.TemplateMethod()) Close();
+        else PublisherService.NotifyObservers($"Pipeline {Name} failed", ScrumMaster);
+        PipelineRunning = false;
+    }
+
     public void Close()
     {
         Status = Status.Closed;
-        //Voeg ProductOwner toe aan notificatie-ontvangers
-        _publisherService.NotifyObservers($"Sprint {Name} is closed", ScrumMaster);
+        PublisherService.NotifyObservers($"Sprint {Name} is closed", ScrumMaster, ((Project)this.GetParent()).ProductOwner);
     }
 }

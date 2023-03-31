@@ -6,7 +6,7 @@ public class TestingState : BacklogItemState
 {
     public override BacklogItemState ToStateToDo(string itemTile, Person scrumMaster)
     {
-        _publisherService.NotifyObservers($"Item {itemTile} is moved from 'testing' to 'to do'", scrumMaster);
+        PublisherService.NotifyObservers($"Item {itemTile} is moved from 'testing' to 'to do'", scrumMaster);
         return new ToDoState();
     }
 
