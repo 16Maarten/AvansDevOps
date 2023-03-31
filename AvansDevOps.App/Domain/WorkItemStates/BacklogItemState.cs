@@ -5,11 +5,11 @@ namespace AvansDevOps.App.Domain.WorkItemStates;
 
 public abstract class BacklogItemState
 {
-    public PublisherService _publisherService = new PublisherService();
+    public PublisherService PublisherService = new PublisherService();
 
     public BacklogItemState()
     {
-        _publisherService.AddObserver(new NotificationService());
+        PublisherService.AddObserver(new NotificationService());
     }
 
     public abstract BacklogItemState ToStateToDo(string itemTile, Person scrumMaster);
