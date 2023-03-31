@@ -4,24 +4,24 @@ namespace AvansDevOps.App.Domain.GitStates;
 
 public abstract class GitState
 {
-    public List<string> _addedChanges = new List<string>();
-    public Dictionary<string, List<string>> _addedCommits = new Dictionary<string, List<string>>();
+    public List<string> AddedChanges = new List<string>();
+    public Dictionary<string, List<string>> AddedCommits = new Dictionary<string, List<string>>();
 
     public GitState() { }
 
     public GitState(List<string> addedCodeSnippets)
     {
-        _addedChanges = addedCodeSnippets;
+        AddedChanges = addedCodeSnippets;
     }
 
     public GitState(Dictionary<string, List<string>> addedCommits)
     {
-        _addedCommits = addedCommits;
+        AddedCommits = addedCommits;
     }
     public GitState(List<string> addedCodeSnippets, Dictionary<string, List<string>> addedCommits)
     {
-        _addedChanges = addedCodeSnippets;
-        _addedCommits = addedCommits;
+        AddedChanges = addedCodeSnippets;
+        AddedCommits = addedCommits;
     }
 
     public abstract GitState ToStateNoGit();
@@ -33,7 +33,7 @@ public abstract class GitState
     public void PushChanges(string workItem, string branch)
     {
         StringBuilder stringBuilder = new StringBuilder();
-        foreach (var committedChanges in _addedCommits)
+        foreach (var committedChanges in AddedCommits)
         {
             stringBuilder.AppendLine("--------------------------------------------");
             stringBuilder.AppendLine($"Branch: {branch}");
@@ -52,7 +52,7 @@ public abstract class GitState
     {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.AppendLine("--------------------------------------------");
-        foreach (var addedChanges in _addedChanges)
+        foreach (var addedChanges in AddedChanges)
         {
             stringBuilder.AppendLine($"-> {addedChanges}");
         }
@@ -63,7 +63,7 @@ public abstract class GitState
     public string GetCommittedChanges()
     {
         StringBuilder stringBuilder = new StringBuilder();
-        foreach (var committedChanges in _addedCommits)
+        foreach (var committedChanges in AddedCommits)
         {
             stringBuilder.AppendLine("--------------------------------------------");
             stringBuilder.AppendLine($"Commit: {committedChanges.Key}");

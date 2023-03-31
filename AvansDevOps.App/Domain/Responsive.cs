@@ -8,7 +8,7 @@ public abstract class Responsive
     private string _message;
     private Person _person;
     private DateTime dateTime = DateTime.Now;
-    private List<Reply> _replies = new List<Reply>();
+    public List<Reply> Replies { get; private set; } = new List<Reply>();
 
     public Person Person { get { return _person; } set { _person = value; } }
 
@@ -18,16 +18,16 @@ public abstract class Responsive
         _message = message;
     }
 
-    public void AddReply(Reply reply)
+    public virtual void AddReply(Reply reply)
     {
-        _replies.Add(reply);
+        Replies.Add(reply);
         reply._person.Replies.Add(reply);
     }
 
-    public void RemoveReply(Reply reply)
+    public virtual void RemoveReply(Reply reply)
     {
         reply._person.Replies.Remove(reply);
-        _replies.Remove(reply);
+        Replies.Remove(reply);
     }
 
     public virtual string ToStringWithoutNested()
@@ -38,7 +38,7 @@ public abstract class Responsive
     public override string ToString()
     {
         var nestedReplies = new StringBuilder();
-        foreach (Reply reply in _replies)
+        foreach (Reply reply in Replies)
         {
             nestedReplies.AppendLine($"   Reply to {_person.Name} -> {reply.ToString()}");
         }

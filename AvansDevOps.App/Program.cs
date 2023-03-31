@@ -18,7 +18,8 @@ var user2 = new Developer("Maarten", "user2@live.com", "user2-slack");
 var thread = new Thread(
     "Can't align object",
     "I can't align object to the right because...",
-    user1
+    user1,
+    new BacklogItem(1, "backlogItem", "description", new Developer("developer"), 20)
 );
 forum.AddThread(thread);
 

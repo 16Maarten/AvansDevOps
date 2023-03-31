@@ -16,7 +16,7 @@ public abstract class Sprint : Composite
     public ICollection<Developer> Developers { get; set; }
     private Pipeline _pipeline { get; set; } = new TestPipeline();
     public PublisherService PublisherService = new PublisherService();
-    private bool PipelineRunning = false;
+    public bool PipelineRunning { get; set; } = false;
 
     public Sprint(
         int id,
@@ -59,10 +59,33 @@ public abstract class Sprint : Composite
         else PublisherService.NotifyObservers($"Pipeline {Name} failed", ScrumMaster);
         PipelineRunning = false;
     }
+    public void CancelPipeline(Person user)
+    {
+        if (isAuthorized(user))
+        {
+            _pipeline.Cancel();
+            PipelineRunning = false;
+        }
+    }
+
+    public void RestartPipeline(Person user)
+    {
+        if (isAuthorized(user))
+        {
+            _pipeline.Cancel();
+            PipelineRunning = false;
+            RunPipeline();
+        }
+    }
 
     public void Close()
     {
         Status = Status.Closed;
         PublisherService.NotifyObservers($"Sprint {Name} is closed", ScrumMaster, ((Project)this.GetParent()).ProductOwner);
+    }
+
+    private bool isAuthorized(Person user)
+    {
+        return user == ScrumMaster;
     }
 }

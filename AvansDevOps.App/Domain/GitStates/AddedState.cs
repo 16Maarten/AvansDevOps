@@ -7,13 +7,13 @@ public class AddedState : GitState
 
     public override GitState ToStateNoGit()
     {
-        Console.WriteLine($"Added changes{(base._addedCommits.Count == 0 ? " " : " and commits ")}are removed.");
+        Console.WriteLine($"Added changes{(base.AddedCommits.Count == 0 ? " " : " and commits ")}are removed.");
         return new NoGitState();
     }
 
     public override GitState ToStateAdded(string codeSnippet)
     {
-        base._addedChanges.Add(codeSnippet);
+        base.AddedChanges.Add(codeSnippet);
         Console.WriteLine("Change is added.");
         Console.WriteLine($"Changes:\n{GetAddedChanges()}");
         return this;
@@ -21,9 +21,9 @@ public class AddedState : GitState
 
     public override GitState ToStateCommitted(string commitMessage)
     {
-        base._addedCommits.Add(commitMessage, base._addedChanges);
+        base.AddedCommits.Add(commitMessage, base.AddedChanges);
         Console.WriteLine($"Changes are committed with message {commitMessage}");
-        return new CommittedState(base._addedCommits);
+        return new CommittedState(base.AddedCommits);
     }
 
     public override GitState ToStateNoGitByPush(string workItemTitle, string branch)
