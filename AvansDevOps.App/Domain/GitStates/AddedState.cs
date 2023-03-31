@@ -1,6 +1,4 @@
-﻿using AvansDevOps.App.Domain.WorkItemStates;
-
-namespace AvansDevOps.App.Domain.GitStates;
+﻿namespace AvansDevOps.App.Domain.GitStates;
 
 public class AddedState : GitState
 {

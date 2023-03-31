@@ -1,6 +1,8 @@
-﻿namespace AvansDevOps.App.DomainServices;
+﻿using AvansDevOps.App.Domain.Users;
 
-public interface ISubscriber<T>
+namespace AvansDevOps.App.DomainServices;
+
+public interface ISubscriber
 {
-    void Update(T notificationObject, string message);
+    void Update(string message, Person[] userList);
 }

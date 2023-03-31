@@ -1,9 +1,11 @@
-﻿namespace AvansDevOps.App.Infrastructure.Notifiers;
+﻿using AvansDevOps.App.Domain.Users;
 
-public class GmailNotifier<T>
+namespace AvansDevOps.App.Infrastructure.Notifiers;
+
+public class GmailNotifier
 {
-    public void PushEmail(T notificationObject, string message)
+    public void PushEmail(string message, Person user)
     {
-        Console.WriteLine(message);
+        Console.WriteLine($"Send email by Gmail library with email: {user.Email} | Message: {message}");
     }
 }

@@ -9,11 +9,11 @@ using AvansDevOps.App.Infrastructure.Visitors;
 using Thread = AvansDevOps.App.Domain.Thread;
 
 //---START FORUM---
-Console.WriteLine("------------START FORUM------------");
+Console.WriteLine("------------------------------------START FORUM------------------------------------");
 
 var forum = new Forum("Design", "This is the design forum");
-var user1 = new Developer("Mo");
-var user2 = new Developer("Maarten");
+var user1 = new Developer("Mo", "user1@live.com", "user1-slack");
+var user2 = new Developer("Maarten", "user2@live.com", "user2-slack");
 
 var thread = new Thread(
     "Can't align object",
@@ -40,11 +40,27 @@ Console.WriteLine(user1.RepliesToString());
 Console.WriteLine("User2 REPLIES:");
 Console.WriteLine(user2.RepliesToString());
 
-Console.WriteLine("------------END FORUM------------");
+Console.WriteLine("------------------------------------END FORUM------------------------------------\n");
 
 //---END FORUM---
 
+
+//---START NOTIFICATION---
+Console.WriteLine("------------------------------------START NOTIFICATION-----------------------------------");
+
+var publisherService = new PublisherService();
+publisherService.AddObserver(new NotificationService());
+publisherService.NotifyObservers("MESSAGE!!!!!!!!!!!", user1);
+publisherService.NotifyObservers("MESSAGE!!!!!!!!!!!", user2);
+
+Console.WriteLine("------------------------------------END NOTIFICATION------------------------------------\n");
+//---END NOTIFICATION---
+
+
+//---START PROJECT---
+Console.WriteLine("------------------------------------START PROJECT------------------------------------");
 var project = new Project("Bioscoop", new ProductOwner("Ger", "Bioscoop"));
+
 List<Developer> developers = new List<Developer>();
 developers.Add(user1);
 developers.Add(user2);
@@ -81,3 +97,7 @@ projectBuilder.SetActivitys(1, 1, activities);
 Project buildProject = projectBuilder.GetResult();
 PrintVisitor printVisitor = new PrintVisitor();
 buildProject.AcceptVisitor(printVisitor);
+project.AcceptVisitor(printVisitor);
+
+Console.WriteLine("------------------------------------END PROJECT------------------------------------\n");
+//---END PROJECT---

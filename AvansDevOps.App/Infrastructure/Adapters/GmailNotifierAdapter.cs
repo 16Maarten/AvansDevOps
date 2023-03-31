@@ -1,13 +1,14 @@
-﻿using AvansDevOps.App.DomainServices;
+﻿using AvansDevOps.App.Domain.Users;
+using AvansDevOps.App.DomainServices;
 using AvansDevOps.App.Infrastructure.Notifiers;
 
 namespace AvansDevOps.App.Infrastructure.Adapters;
 
-public abstract class GmailNotifierAdapter<T> : INotifier<T>
+public class GmailNotifierAdapter : INotifier
 {
-    private GmailNotifier<T> _notifier = new GmailNotifier<T>();
-    public void SendNotification(T notificationObject, string message)
+    private GmailNotifier _notifier = new GmailNotifier();
+    public void SendNotification(string message, Person user)
     {
-        _notifier.PushEmail(notificationObject, message);
+        _notifier.PushEmail(message, user);
     }
 }

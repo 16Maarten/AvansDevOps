@@ -1,7 +1,4 @@
-﻿using AvansDevOps.App.Domain.WorkItemStates;
-using System.Text;
-
-namespace AvansDevOps.App.Domain.GitStates;
+﻿namespace AvansDevOps.App.Domain.GitStates;
 
 public class NoGitState : GitState
 {

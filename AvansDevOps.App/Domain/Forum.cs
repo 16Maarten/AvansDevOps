@@ -1,5 +1,4 @@
-﻿using AvansDevOps.App.Domain.Users;
-using System.Text;
+﻿using System.Text;
 
 namespace AvansDevOps.App.Domain;
 
@@ -9,7 +8,8 @@ public class Forum
     private string _description;
     private List<Thread> _threads = new List<Thread>();
 
-    public Forum(string name, string description) {
+    public Forum(string name, string description)
+    {
         _name = name;
         _description = description;
     }

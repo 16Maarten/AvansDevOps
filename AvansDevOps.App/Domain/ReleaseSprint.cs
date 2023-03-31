@@ -1,6 +1,5 @@
 ﻿using AvansDevOps.App.Domain.ProjectHierarchy;
 using AvansDevOps.App.Domain.Users;
-using AvansDevOps.App.Infrastructure.Visitors;
 
 namespace AvansDevOps.App.Domain;
 

@@ -1,11 +1,12 @@
-﻿using AvansDevOps.App.DomainServices;
+﻿using AvansDevOps.App.Domain.Users;
+using AvansDevOps.App.DomainServices;
 
 namespace AvansDevOps.App.Infrastructure.Notifiers;
 
-public class SlackNotifier<T> : INotifier<T>
+public class SlackNotifier : INotifier
 {
-    public void SendNotification(T notificationObject, string message)
+    public void SendNotification(string message, Person user)
     {
-        Console.WriteLine(message);
+        Console.WriteLine($"Slack-ID: {user.SlackId} | Message: {message}");
     }
 }

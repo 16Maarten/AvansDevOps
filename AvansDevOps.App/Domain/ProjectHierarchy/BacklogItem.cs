@@ -1,7 +1,7 @@
-﻿using AvansDevOps.App.Domain.WorkItemStates;
+﻿using AvansDevOps.App.Domain.GitStates;
 using AvansDevOps.App.Domain.Users;
+using AvansDevOps.App.Domain.WorkItemStates;
 using AvansDevOps.App.Infrastructure.Visitors;
-using AvansDevOps.App.Domain.GitStates;
 
 namespace AvansDevOps.App.Domain.ProjectHierarchy;
 
@@ -16,7 +16,6 @@ public class BacklogItem : Composite, IWorkItem
     public IBacklogItemState SprintBoardState { get; set; } = new ToDoState();
     private GitState _gitState = new NoGitState();
     private string _branch = "main";
-
     public BacklogItem(int id, string title, string description, Person developer, int storyPoints)
     {
         Id = id;
@@ -28,7 +27,8 @@ public class BacklogItem : Composite, IWorkItem
 
     public void ToTodo()
     {
-        SprintBoardState = SprintBoardState.ToStateToDo();
+        //Voeg ScrumMaster ipv Tester toe aan notificatie-ontvangers
+        SprintBoardState = SprintBoardState.ToStateToDo(Title, Tester);
     }
 
     public void ToDoing()
@@ -38,7 +38,7 @@ public class BacklogItem : Composite, IWorkItem
 
     public void ToReadyForTesting()
     {
-        SprintBoardState = SprintBoardState.ToStateReadyForTesting();
+        SprintBoardState = SprintBoardState.ToStateReadyForTesting(Title, Tester);
     }
 
     public void ToTesting()
