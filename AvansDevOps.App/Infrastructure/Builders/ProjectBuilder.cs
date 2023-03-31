@@ -36,6 +36,7 @@ namespace AvansDevOps.App.Infrastructure.Builders
                             foreach (Activity activity in activities)
                             {
                                 backlogItem.AddComponent(activity);
+                                activity.SetParent(backlogItem);
                             }
                         }
                     }
@@ -54,6 +55,7 @@ namespace AvansDevOps.App.Infrastructure.Builders
                     foreach (BacklogItem backlogItem in backlogItems)
                     {
                         sprint.AddComponent(backlogItem);
+                        backlogItem.SetParent(sprint);
                     }
                 }
             }
@@ -64,6 +66,7 @@ namespace AvansDevOps.App.Infrastructure.Builders
             foreach (Sprint sprint in sprints)
             {
                 Project.AddComponent(sprint);
+                sprint.SetParent(Project);
             }
         }
     }
