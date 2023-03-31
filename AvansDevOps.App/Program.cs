@@ -3,6 +3,7 @@ using AvansDevOps.App.Domain;
 using AvansDevOps.App.Domain.ProjectHierarchy;
 using AvansDevOps.App.Domain.Users;
 using AvansDevOps.App.Domain.WorkItemStates;
+using AvansDevOps.App.Infrastructure.Builders;
 using AvansDevOps.App.Infrastructure.Services;
 using AvansDevOps.App.Infrastructure.Visitors;
 using Thread = AvansDevOps.App.Domain.Thread;
@@ -63,48 +64,39 @@ var project = new Project("Bioscoop", new ProductOwner("Ger", "Bioscoop"));
 List<Developer> developers = new List<Developer>();
 developers.Add(user1);
 developers.Add(user2);
+var sprints = new List<Sprint>();
 var sprint = new ReleaseSprint(
+    1,
     "Sprint 1",
     DateTime.Now,
     DateTime.Now.AddDays(7),
-    Status.Open,
     new ScrumMaster("Marcel"),
     developers
 );
+sprints.Add(sprint);
+var backlogItems = new List<BacklogItem>();
 
-var backlogItem1 = new BacklogItem(
-    "Bouw FE",
-    "Gebruik javascript",
-    user1,
-    user2,
-    5,
-    new ToDoState()
-);
-var backlogItem2 = new BacklogItem("Bouw BE", "Gebruik C#", user2, user1, 5, new ToDoState());
-var activity1 = new Activity(
-    "Inlog pagina",
-    "Maak een inlog pagina",
-    user1,
-    user2,
-    2,
-    new ToDoState()
-);
-var activity2 = new Activity(
-    "home pagina",
-    "Maak een home pagina",
-    user1,
-    user2,
-    3,
-    new ToDoState()
-);
+var backlogItem1 = new BacklogItem(1, "Bouw FE", "Gebruik javascript", user1, 5);
+var backlogItem2 = new BacklogItem(2, "Bouw BE", "Gebruik C#", user2, 5);
+backlogItems.Add(backlogItem1);
+backlogItems.Add(backlogItem2);
+var activities = new List<Activity>();
 
-project.AddComponent(sprint);
-sprint.AddComponent(backlogItem1);
-sprint.AddComponent(backlogItem2);
-backlogItem1.AddComponent(activity1);
-backlogItem1.AddComponent(activity2);
+var activity1 = new Activity(1, "Inlog pagina", "Maak een inlog pagina", user1, 2);
+var activity2 = new Activity(2, "home pagina", "Maak een home pagina", user1, 3);
+activities.Add(activity1);
+activities.Add(activity2);
 
+var projectBuilder = new ProjectBuilder();
+
+projectBuilder.BuildProject(project);
+projectBuilder.SetSprints(sprints);
+projectBuilder.SetBacklogItems(1, backlogItems);
+projectBuilder.SetActivitys(1, 1, activities);
+
+Project buildProject = projectBuilder.GetResult();
 PrintVisitor printVisitor = new PrintVisitor();
+buildProject.AcceptVisitor(printVisitor);
 project.AcceptVisitor(printVisitor);
 
 Console.WriteLine("------------------------------------END PROJECT------------------------------------\n");

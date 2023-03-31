@@ -11,7 +11,10 @@ public class PrintVisitor : Visitor
         Console.WriteLine("======Activity " + activity.Title + "========");
         Console.WriteLine("Description: " + activity.Description);
         Console.WriteLine("Developer: " + activity.Developer.Name);
-        Console.WriteLine("Tester: " + activity.Tester.Name);
+        if (activity.Tester != null)
+        {
+            Console.WriteLine("Tester: " + activity.Tester.Name);
+        }
         Console.WriteLine("StoryPoints: " + activity.StoryPoints);
     }
 
@@ -20,7 +23,10 @@ public class PrintVisitor : Visitor
         Console.WriteLine("======BacklogItem " + backlogItem.Title + "========");
         Console.WriteLine("Description: " + backlogItem.Description);
         Console.WriteLine("Developer: " + backlogItem.Developer.Name);
-        Console.WriteLine("Tester: " + backlogItem.Tester.Name);
+        if (backlogItem.Tester != null)
+        {
+            Console.WriteLine("Tester: " + backlogItem.Tester.Name);
+        }
         Console.WriteLine("StoryPoints: " + backlogItem.StoryPoints);
     }
 
