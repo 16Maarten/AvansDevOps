@@ -13,7 +13,7 @@ public class Activity : Component, IWorkItem
     public Person Developer { get; set; }
     public Person Tester { get; set; }
     public int StoryPoints { get; set; }
-    public IBacklogItemState SprintBoardState { get; set; } = new ToDoState();
+    public BacklogItemState SprintBoardState { get; set; } = new ToDoState();
     private GitState _gitState = new NoGitState();
     private string _branch = "main";
 

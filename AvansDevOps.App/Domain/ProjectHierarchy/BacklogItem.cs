@@ -13,9 +13,10 @@ public class BacklogItem : Composite, IWorkItem
     public Person Developer { get; set; }
     public Person Tester { get; set; }
     public int StoryPoints { get; set; }
-    public IBacklogItemState SprintBoardState { get; set; } = new ToDoState();
+    public BacklogItemState SprintBoardState { get; set; } = new ToDoState();
     private GitState _gitState = new NoGitState();
     private string _branch = "main";
+
     public BacklogItem(int id, string title, string description, Person developer, int storyPoints)
     {
         Id = id;
