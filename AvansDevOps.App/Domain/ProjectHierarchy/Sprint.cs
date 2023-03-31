@@ -63,7 +63,6 @@ public abstract class Sprint : Composite
     public void Close()
     {
         Status = Status.Closed;
-        //Voeg ProductOwner toe aan notificatie-ontvangers
-        PublisherService.NotifyObservers($"Sprint {Name} is closed", ScrumMaster);
+        PublisherService.NotifyObservers($"Sprint {Name} is closed", ScrumMaster, ((Project)this.GetParent()).ProductOwner);
     }
 }

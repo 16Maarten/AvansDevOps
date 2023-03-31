@@ -14,7 +14,7 @@ public class ReleaseSprint : Sprint
         ScrumMaster scrumMaster,
         ICollection<Developer> developers
     )
-        : base(name, startDate, endDate, status, scrumMaster, developers) { }
+        : base(id, name, startDate, endDate, scrumMaster, developers) { }
 
     public void StartRelease(bool resultsPositive)
     {
@@ -25,7 +25,6 @@ public class ReleaseSprint : Sprint
     public void CancelRelease()
     {
         Status = Status.Cancelled;
-        //Voeg ProductOwner toe aan notificatie-ontvangers
-        PublisherService.NotifyObservers($"Release of sprint {Name} is cancelled", ScrumMaster);
+        PublisherService.NotifyObservers($"Release of sprint {Name} is cancelled", ScrumMaster, ((Project)this.GetParent()).ProductOwner);
     }
 }

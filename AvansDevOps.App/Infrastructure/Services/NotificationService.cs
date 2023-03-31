@@ -1,4 +1,5 @@
-﻿using AvansDevOps.App.Domain.Users;
+﻿using AvansDevOps.App.Domain;
+using AvansDevOps.App.Domain.Users;
 using AvansDevOps.App.DomainServices;
 using AvansDevOps.App.Infrastructure.Adapters;
 using AvansDevOps.App.Infrastructure.Notifiers;
@@ -13,16 +14,16 @@ public class NotificationService : ISubscriber
     {
         foreach (var user in userList)
         {
-            if (user.ContactPreferences.Contains("Slack"))
-            {
-                _notifier = new SlackNotifier();
-                _notifier.SendNotification(message, user);
-            }
-
-            if (user.ContactPreferences.Contains("Email"))
+            if (user.ContactPreferences.Contains(ContactPreference.Email))
             {
 
                 _notifier = new OutlookNotifierAdapter();
+                _notifier.SendNotification(message, user);
+            }
+
+            if (user.ContactPreferences.Contains(ContactPreference.Slack))
+            {
+                _notifier = new SlackNotifier();
                 _notifier.SendNotification(message, user);
             }
         }
