@@ -7,30 +7,23 @@ namespace AvansDevOps.App.Domain.ProjectHierarchy;
 
 public class Activity : Component, IWorkItem
 {
+    public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public Person Developer { get; set; }
     public Person Tester { get; set; }
     public int StoryPoints { get; set; }
-    public BacklogItemState SprintBoardState { get; set; }
+    public BacklogItemState SprintBoardState { get; set; } = new ToDoState();
     private GitState _gitState = new NoGitState();
     private string _branch = "main";
 
-    public Activity(
-        string title,
-        string description,
-        Person developer,
-        Person tester,
-        int storyPoints,
-        BacklogItemState state
-    )
+    public Activity(int id, string title, string description, Person developer, int storyPoints)
     {
+        Id = id;
         Title = title;
         Description = description;
         Developer = developer;
-        Tester = tester;
         StoryPoints = storyPoints;
-        SprintBoardState = state;
     }
 
     public void ToTodo()
