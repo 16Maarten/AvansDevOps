@@ -1,7 +1,5 @@
 ﻿using AvansDevOps.App.Domain.ProjectHierarchy;
-using Microsoft.VisualBasic;
-using System;
-using System.Linq;
+using AvansDevOps.App.DomainServices;
 
 namespace AvansDevOps.App.Infrastructure.Builders
 {
@@ -21,24 +19,16 @@ namespace AvansDevOps.App.Infrastructure.Builders
 
         public void SetActivitys(int BacklogItemId, int SprintId, ICollection<Activity> activities)
         {
-            var sprints = Project.GetChildren().Cast<Sprint>().ToList();
-            if (sprints.Count > 0)
+            var sprint = findSprint(SprintId);
+            if (sprint != null)
             {
-                Sprint sprint = sprints.Find(s => s.Id == SprintId);
-                if (sprint != null)
+                BacklogItem backlogItem = findBacklogItem(BacklogItemId, sprint);
+                if (backlogItem != null)
                 {
-                    var backlogitems = sprint.GetChildren().Cast<BacklogItem>().ToList();
-                    if (sprints.Count > 0)
+                    foreach (Activity activity in activities)
                     {
-                        BacklogItem backlogItem = backlogitems.Find(s => s.Id == BacklogItemId);
-                        if (backlogItem != null)
-                        {
-                            foreach (Activity activity in activities)
-                            {
-                                backlogItem.AddComponent(activity);
-                                activity.SetParent(backlogItem);
-                            }
-                        }
+                        backlogItem.AddComponent(activity);
+                        activity.SetParent(backlogItem);
                     }
                 }
             }
@@ -46,17 +36,13 @@ namespace AvansDevOps.App.Infrastructure.Builders
 
         public void SetBacklogItems(int SprintId, ICollection<BacklogItem> backlogItems)
         {
-            var sprints = Project.GetChildren().Cast<Sprint>().ToList();
-            if (sprints.Count > 0)
+            var sprint = findSprint(SprintId);
+            if (sprint != null)
             {
-                Sprint sprint = sprints.Find(s => s.Id == SprintId);
-                if (sprint != null)
+                foreach (BacklogItem backlogItem in backlogItems)
                 {
-                    foreach (BacklogItem backlogItem in backlogItems)
-                    {
-                        sprint.AddComponent(backlogItem);
-                        backlogItem.SetParent(sprint);
-                    }
+                    sprint.AddComponent(backlogItem);
+                    backlogItem.SetParent(sprint);
                 }
             }
         }
@@ -68,6 +54,26 @@ namespace AvansDevOps.App.Infrastructure.Builders
                 Project.AddComponent(sprint);
                 sprint.SetParent(Project);
             }
+        }
+
+        private Sprint findSprint(int SprintId)
+        {
+            var sprints = Project.GetChildren().Cast<Sprint>().ToList();
+            if (sprints.Count > 0)
+            {
+                return sprints.Find(s => s.Id == SprintId);
+            }
+            return null;
+        }
+
+        private BacklogItem findBacklogItem(int BacklogItemId, Sprint sprint)
+        {
+            var backlogitems = sprint.GetChildren().Cast<BacklogItem>().ToList();
+            if (backlogitems.Count > 0)
+            {
+                return backlogitems.Find(s => s.Id == BacklogItemId);
+            }
+            return null;
         }
     }
 }

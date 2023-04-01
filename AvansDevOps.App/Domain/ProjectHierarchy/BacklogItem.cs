@@ -2,6 +2,7 @@
 using AvansDevOps.App.Domain.Users;
 using AvansDevOps.App.Domain.WorkItemStates;
 using AvansDevOps.App.Infrastructure.Visitors;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AvansDevOps.App.Domain.ProjectHierarchy;
 
@@ -29,7 +30,10 @@ public class BacklogItem : Composite, IWorkItem
     public void ToTodo()
     {
         //Voeg ScrumMaster ipv Tester toe aan notificatie-ontvangers
-        SprintBoardState = SprintBoardState.ToStateToDo(Title, ((Sprint)this.GetParent()).ScrumMaster);
+        SprintBoardState = SprintBoardState.ToStateToDo(
+            Title,
+            ((Sprint)this.GetParent()).ScrumMaster
+        );
     }
 
     public void ToDoing()
@@ -54,8 +58,23 @@ public class BacklogItem : Composite, IWorkItem
 
     public void ToDone()
     {
-        // TODO Check of alle activiteiten op done staan
-        SprintBoardState = SprintBoardState.ToStateDone();
+        var activities = this.GetChildren().Cast<Activity>().ToList();
+        if (activities.Count > 0)
+        {
+            if (
+                this.GetChildren()
+                    .Cast<Activity>()
+                    .ToList()
+                    .TrueForAll(x => x.SprintBoardState.GetType().IsInstanceOfType(new DoneState()))
+            )
+            {
+                SprintBoardState = SprintBoardState.ToStateDone();
+            }
+            else
+            {
+                Console.WriteLine("Not all activitites of backlogitem are on state done");
+            }
+        }
     }
 
     public override void AcceptVisitor(Visitor visitor)

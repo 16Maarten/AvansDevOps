@@ -46,22 +46,28 @@ public abstract class Sprint : Composite
     {
         if (!PipelineRunning)
         {
-            if (pipeline == "deploy") _pipeline = new DeploymentPipeline();
-            else if (pipeline == "test") _pipeline = new TestPipeline();
-            else throw new Exception("Pipeline not found");
+            if (pipeline == "deploy")
+                _pipeline = new DeploymentPipeline();
+            else if (pipeline == "test")
+                _pipeline = new TestPipeline();
+            else
+                throw new Exception("Pipeline not found");
         }
     }
 
     public void RunPipeline()
     {
         PipelineRunning = true;
-        if (_pipeline.TemplateMethod()) Close();
-        else PublisherService.NotifyObservers($"Pipeline {Name} failed", ScrumMaster);
+        if (_pipeline.TemplateMethod())
+            Close();
+        else
+            PublisherService.NotifyObservers($"Pipeline {Name} failed", ScrumMaster);
         PipelineRunning = false;
     }
+
     public void CancelPipeline(Person user)
     {
-        if (isAuthorized(user))
+        if (IsAuthorized(user))
         {
             _pipeline.Cancel();
             PipelineRunning = false;
@@ -70,7 +76,7 @@ public abstract class Sprint : Composite
 
     public void RestartPipeline(Person user)
     {
-        if (isAuthorized(user))
+        if (IsAuthorized(user))
         {
             _pipeline.Cancel();
             PipelineRunning = false;
@@ -81,11 +87,39 @@ public abstract class Sprint : Composite
     public void Close()
     {
         Status = Status.Closed;
-        PublisherService.NotifyObservers($"Sprint {Name} is closed", ScrumMaster, ((Project)this.GetParent()).ProductOwner);
+        PublisherService.NotifyObservers(
+            $"Sprint {Name} is closed",
+            ScrumMaster,
+            ((Project)this.GetParent()).ProductOwner
+        );
     }
 
-    private bool isAuthorized(Person user)
+    public bool IsAuthorized(Person user)
     {
         return user == ScrumMaster;
+    }
+
+    public int GetStoryPointsDeveloper(Developer developer)
+    {
+        int storyPoints = 0;
+        var backlogItems = this.GetChildren().Cast<BacklogItem>().ToList();
+        backlogItems.ForEach(x =>
+        {
+            if (developer.Equals(x.Developer))
+                storyPoints += x.StoryPoints;
+        });
+        backlogItems.ForEach(x =>
+        {
+            if (x.GetChildren().Count() > 0)
+            {
+                var activities = x.GetChildren().Cast<Activity>().ToList();
+                activities.ForEach(y =>
+                {
+                    if (developer.Equals(y.Developer))
+                        storyPoints += y.StoryPoints;
+                });
+            }
+        });
+        return storyPoints;
     }
 }
