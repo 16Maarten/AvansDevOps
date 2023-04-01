@@ -1,11 +1,11 @@
-name: Test & analyze
+name: Test, build and analyze
 on:
   push:
     branches:
       - main
 jobs:
   testing:
-    name: Testing
+    name: Test
     runs-on: windows-latest
     steps:
       - name: Set up JDK 11
@@ -25,7 +25,7 @@ jobs:
           name: coverage
           path: coverage.xml
   sonarcloud:
-    name: Analyzing
+    name: Build and analyze
     runs-on: windows-latest
     needs: testing
     steps:
