@@ -29,7 +29,7 @@ public class SQLDAOScrumMaster : IDAOScrumMaster
 
     public ScrumMaster Find(int id)
     {
-        return new ScrumMaster("PO1");
+        return new ScrumMaster("SM");
     }
 
     public List<ScrumMaster> FindAll()
