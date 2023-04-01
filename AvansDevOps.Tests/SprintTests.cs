@@ -1,12 +1,20 @@
 using AvansDevOps.App.Domain;
 using AvansDevOps.App.Domain.ProjectHierarchy;
+
 namespace AvansDevOps.Tests;
 
 public class SprintTests
 {
     public ReleaseSprint CreateReleaseSprint()
     {
-        var sprint = new ReleaseSprint(1, "Sprint 1", DateTime.Now, DateTime.Now, new ScrumMaster("ScrumMaster"), new List<Developer>());
+        var sprint = new ReleaseSprint(
+            1,
+            "Sprint 1",
+            DateTime.Now,
+            DateTime.Now,
+            new ScrumMaster("ScrumMaster"),
+            new List<Developer>()
+        );
         sprint.SetParent(new Project("project", new ProductOwner("product", "product owner")));
         sprint.SetPipeLine("test");
         return sprint;
@@ -43,7 +51,6 @@ public class SprintTests
         Assert.False(sprint.PipelineRunning);
     }
 
-
     [Fact]
     public void Test_Close()
     {
@@ -55,5 +62,19 @@ public class SprintTests
 
         // Assert
         Assert.Equal(Status.Closed, sprint.Status);
+    }
+
+    [Fact]
+    public void Test_GetStoryPointsDeveloper()
+    {
+        // Arrange
+        var sprint = CreateReleaseSprint();
+        var developer = new Developer("developer");
+        var backlogItem = new BacklogItem(1, "story", "story 1", developer, 1);
+        sprint.AddComponent(backlogItem);
+        // Act
+        var result = sprint.GetStoryPointsDeveloper(developer);
+        // Assert
+        Assert.Equal(1, result);
     }
 }

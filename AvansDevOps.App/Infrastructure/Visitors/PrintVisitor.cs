@@ -46,6 +46,8 @@ public class PrintVisitor : Visitor
         Console.WriteLine("ScrumMaster: " + sprint.ScrumMaster.Name);
         Console.WriteLine("Developers: ");
         var developers = new List<Developer>(sprint.Developers);
-        developers.ForEach(dev => Console.WriteLine(dev.Name));
+        developers.ForEach(
+            dev => Console.WriteLine(dev.Name + " : " + sprint.GetStoryPointsDeveloper(dev))
+        );
     }
 }

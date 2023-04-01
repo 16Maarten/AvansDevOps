@@ -2,7 +2,7 @@
 using AvansDevOps.App.Domain.Users;
 using System.Diagnostics;
 
-namespace AvansDevOps.App.Infrastructure.Builders;
+namespace AvansDevOps.App.DomainServices;
 
 public interface IBuilder
 {
