@@ -18,6 +18,7 @@ public class DoingStateTests
         var developer = new Developer("developer");
         var backlogItem = new BacklogItem(1, "story", "story 1", developer, 5);
         backlogItem.SetParent(sprint);
+        backlogItem.Tester = developer;
         backlogItem.ToDoing();
         return backlogItem;
     }
