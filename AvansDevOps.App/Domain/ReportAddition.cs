@@ -19,6 +19,35 @@ public class ReportAddition
         _date = date;
     }
 
+    public string CompanyName
+    {
+        get => _companyName;
+        set => _companyName = value;
+    }
+
+    public string ProjectName
+    {
+        get => _projectName;
+        set => _projectName = value;
+    }
+
+    public string Version
+    {
+        get => _version;
+        set => _version = value;
+    }
+
+    public Image Logo
+    {
+        get => _logo; set => _logo = value;
+    }
+
+    public DateTime Date
+    {
+        get => _date;
+        set => _date = value;
+    }
+
     public override string ToString()
     {
         return $"{_companyName} - {_projectName} - {_version} - {_logo.ToString()} - {_date.ToLocalTime()}";

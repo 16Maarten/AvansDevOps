@@ -45,7 +45,7 @@ public abstract class GitState
             stringBuilder.AppendLine("--------------------------------------------");
         }
 
-        File.WriteAllText($"../../../../Exports/{workItem}.text", stringBuilder.ToString());
+        File.WriteAllText($"../../../Exports/{workItem}.txt", stringBuilder.ToString());
     }
 
     public string GetAddedChanges()

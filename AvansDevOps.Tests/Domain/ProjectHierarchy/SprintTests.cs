@@ -1,6 +1,4 @@
-using AvansDevOps.App.Domain;
-using AvansDevOps.App.Domain.ProjectHierarchy;
-namespace AvansDevOps.Tests;
+namespace AvansDevOps.Tests.Domain.ProjectHierarchy;
 
 public class SprintTests
 {

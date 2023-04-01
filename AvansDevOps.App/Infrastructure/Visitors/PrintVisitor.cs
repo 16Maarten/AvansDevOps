@@ -1,6 +1,5 @@
 ﻿using AvansDevOps.App.Domain.ProjectHierarchy;
 using AvansDevOps.App.Domain.Users;
-using System.Diagnostics.Metrics;
 
 namespace AvansDevOps.App.Infrastructure.Visitors;
 

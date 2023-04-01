@@ -1,7 +1,4 @@
 ﻿using AvansDevOps.App.Domain.ProjectHierarchy;
-using Microsoft.VisualBasic;
-using System;
-using System.Linq;
 
 namespace AvansDevOps.App.Infrastructure.Builders
 {

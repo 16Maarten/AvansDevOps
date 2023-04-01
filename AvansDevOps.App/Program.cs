@@ -2,8 +2,8 @@
 using AvansDevOps.App.Domain;
 using AvansDevOps.App.Domain.ProjectHierarchy;
 using AvansDevOps.App.Domain.Users;
-using AvansDevOps.App.Domain.WorkItemStates;
 using AvansDevOps.App.Infrastructure.Builders;
+using AvansDevOps.App.Infrastructure.Printers;
 using AvansDevOps.App.Infrastructure.Services;
 using AvansDevOps.App.Infrastructure.Visitors;
 using Thread = AvansDevOps.App.Domain.Thread;
@@ -19,7 +19,8 @@ var thread = new Thread(
     "Can't align object",
     "I can't align object to the right because...",
     user1,
-    new BacklogItem(1, "backlogItem", "description", new Developer("developer"), 20)
+    new BacklogItem(1, "backlogItem", "description", new Developer("developer"), 20),
+    new List<Developer>() { user1, user2 }
 );
 forum.AddThread(thread);
 
@@ -102,3 +103,6 @@ project.AcceptVisitor(printVisitor);
 
 Console.WriteLine("------------------------------------END PROJECT------------------------------------\n");
 //---END PROJECT---
+
+new PngPrinter().Print(forum.ToString());
+new PdfPrinter().Print(forum.ToString());

@@ -1,6 +1,4 @@
 ﻿using AvansDevOps.App.Domain.ProjectHierarchy;
-using AvansDevOps.App.Domain.Users;
-using System.Diagnostics;
 
 namespace AvansDevOps.App.Infrastructure.Builders;
 

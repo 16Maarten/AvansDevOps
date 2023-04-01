@@ -1,4 +1,4 @@
-namespace AvansDevOps.Tests.GitStates;
+namespace AvansDevOps.Tests.Domain.GitStates;
 
 public class CommittedStateTests
 {
@@ -77,6 +77,7 @@ public class CommittedStateTests
         {
             Assert.IsType<NoGitState>(result.Item1);
             Assert.IsType<string>(result.Item2);
+            result.Item1.AddedCommits["commit1"].Contains("code1");
         }
     }
 }

@@ -1,10 +1,10 @@
-namespace AvansDevOps.Tests;
+namespace AvansDevOps.Tests.Domain;
 
 public class ThreadTests
 {
     private Thread CreateThread()
     {
-        return new Thread("title", "message", new Developer("developer"), new BacklogItem(1, "backlogItem", "description", new Developer("developer"), 20));
+        return new Thread("title", "message", new Developer("developer"), new BacklogItem(1, "backlogItem", "description", new Developer("developer"), 20), new List<Developer>());
     }
 
     [Fact]

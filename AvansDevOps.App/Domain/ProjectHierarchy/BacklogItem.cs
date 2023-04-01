@@ -26,6 +26,11 @@ public class BacklogItem : Composite, IWorkItem
         StoryPoints = storyPoints;
     }
 
+    public void CreateThread(string title, string message, Person person)
+    {
+        if(SprintBoardState.GetType() != typeof(DoneState)) new Thread(title, message, person, this, ((Sprint)GetParent()).Developers);
+    }
+
     public void ToTodo()
     {
         //Voeg ScrumMaster ipv Tester toe aan notificatie-ontvangers
