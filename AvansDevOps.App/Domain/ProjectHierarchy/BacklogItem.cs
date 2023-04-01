@@ -85,6 +85,10 @@ public class BacklogItem : Composite, IWorkItem
                 Console.WriteLine("Not all activitites of backlogitem are on state done");
             }
         }
+        else
+        {
+            SprintBoardState = SprintBoardState.ToStateDone();
+        }
     }
 
     public override void AcceptVisitor(Visitor visitor)

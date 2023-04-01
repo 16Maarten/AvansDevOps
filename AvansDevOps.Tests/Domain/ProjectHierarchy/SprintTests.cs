@@ -74,4 +74,19 @@ public class SprintTests
         // Assert
         Assert.Equal(1, result);
     }
+
+    //wrirte another test for the method GetStoryPointsDeveloper
+    [Fact]
+    public void Test_GetStoryPointsDeveloper2()
+    {
+        var sprint = CreateReleaseSprint();
+        var developer = new Developer("developer");
+        var backlogItem = new BacklogItem(1, "story", "story 1", developer, 5);
+        backlogItem.AddComponent(new Activity(1, "story", "story 2", developer, 3));
+        sprint.AddComponent(backlogItem);
+        // Act
+        var result = sprint.GetStoryPointsDeveloper(developer);
+        // Assert
+        Assert.Equal(8, result);
+    }
 }
