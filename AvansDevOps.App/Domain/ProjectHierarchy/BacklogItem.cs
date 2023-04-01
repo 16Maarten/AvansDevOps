@@ -27,9 +27,14 @@ public class BacklogItem : Composite, IWorkItem
         StoryPoints = storyPoints;
     }
 
-    public void CreateThread(string title, string message, Person person)
+    public Thread? CreateThread(string title, string message, Person person)
     {
-        if(SprintBoardState.GetType() != typeof(DoneState)) new Thread(title, message, person, this, ((Sprint)GetParent()).Developers);
+        if (SprintBoardState.GetType() != typeof(DoneState))
+        {
+            return new Thread(title, message, person, this, ((Sprint)GetParent()).Developers);
+        }
+
+        return null;
     }
 
     public void ToTodo()
