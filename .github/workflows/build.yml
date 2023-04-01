@@ -22,7 +22,8 @@ jobs:
           dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
       - uses: actions/upload-artifact@v3
         with:
-          name: coverage.xml
+          name: coverage
+          path: coverage.xml
   sonarcloud:
     name: Analyzing
     runs-on: windows-latest
@@ -38,7 +39,7 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - uses: actions/download-artifact@v3
         with:
-          name: coverage.xml
+          name: coverage
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
