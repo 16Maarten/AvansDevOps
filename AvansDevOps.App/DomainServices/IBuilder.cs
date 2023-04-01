@@ -1,6 +1,6 @@
 ﻿using AvansDevOps.App.Domain.ProjectHierarchy;
 
-namespace AvansDevOps.App.Infrastructure.Builders;
+namespace AvansDevOps.App.DomainServices;
 
 public interface IBuilder
 {
