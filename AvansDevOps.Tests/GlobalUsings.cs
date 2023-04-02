@@ -37,7 +37,7 @@ public class GlobalUsings
 
     public static Thread CreateThread()
     {
-        return new Thread("title", "message", new Developer("developer"), new BacklogItem(1, "backlogItem", "description", new Developer("developer"), 20), new List<Developer>());
+        return new Thread("title", "message", new Developer("developer"), new BacklogItem(1, "backlogItem", "description", new Developer("developer"), 20), new List<Developer>() {  new Developer("dev1")});
     }
 
 
