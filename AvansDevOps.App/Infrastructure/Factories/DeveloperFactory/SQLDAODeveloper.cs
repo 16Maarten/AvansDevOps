@@ -29,7 +29,7 @@ public class SQLDAODeveloper : IDAODeveloper
 
     public Developer Find(int id)
     {
-        return new Developer("Dev1");
+        return new Developer("Dev");
     }
 
     public List<Developer> FindAll()
