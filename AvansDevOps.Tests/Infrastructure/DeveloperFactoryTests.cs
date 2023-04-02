@@ -1,8 +1,5 @@
-using AvansDevOps.App.Domain.Users;
 using AvansDevOps.App.DomainServices.FactoryInterfaces;
-using AvansDevOps.App.Infrastructure.Builders;
 using AvansDevOps.App.Infrastructure.Factories;
-using System.Runtime.Intrinsics.X86;
 
 namespace AvansDevOps.Tests.Domain;
 

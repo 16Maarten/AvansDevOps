@@ -4,11 +4,10 @@ global using AvansDevOps.App.Domain.ProjectHierarchy;
 global using AvansDevOps.App.Domain.Users;
 global using AvansDevOps.App.Domain.WorkItemStates;
 global using AvansDevOps.App.DomainServices;
-global using System.Drawing;
 global using FluentAssertions.Execution;
-global using Xunit;
 global using Moq;
-global using AutoFixture.Xunit2;
+global using System.Drawing;
+global using Xunit;
 global using Thread = AvansDevOps.App.Domain.Thread;
 
 

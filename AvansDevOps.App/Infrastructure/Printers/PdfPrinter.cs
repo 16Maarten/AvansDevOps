@@ -1,8 +1,6 @@
-﻿using AvansDevOps.App.Domain.ProjectHierarchy;
-using AvansDevOps.App.DomainServices;
+﻿using AvansDevOps.App.DomainServices;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using System.Diagnostics;
 using System.Text;
 
 namespace AvansDevOps.App.Infrastructure.Printers;

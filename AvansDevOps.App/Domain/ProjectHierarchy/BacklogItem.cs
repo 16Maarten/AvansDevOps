@@ -2,7 +2,6 @@
 using AvansDevOps.App.Domain.Users;
 using AvansDevOps.App.Domain.WorkItemStates;
 using AvansDevOps.App.Infrastructure.Visitors;
-using System.Security.Cryptography.X509Certificates;
 
 namespace AvansDevOps.App.Domain.ProjectHierarchy;
 

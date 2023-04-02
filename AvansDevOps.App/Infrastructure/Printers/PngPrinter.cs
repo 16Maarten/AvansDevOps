@@ -1,7 +1,6 @@
 ﻿using AvansDevOps.App.DomainServices;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Text;
 using Image = System.Drawing.Image;
 
 namespace AvansDevOps.App.Infrastructure.Printers;

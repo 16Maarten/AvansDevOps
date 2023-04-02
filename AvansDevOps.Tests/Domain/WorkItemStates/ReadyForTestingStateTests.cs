@@ -1,6 +1,3 @@
-using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
-
 namespace AvansDevOps.Tests.Domain;
 
 public class ReadyForTestingSateStateTests

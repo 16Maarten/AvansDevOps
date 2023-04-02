@@ -14,7 +14,7 @@ public class ReportTests
 
         // Act
         var result = report.Print(PrintFormat.PDF);
-        
+
         // Assert
         Assert.True(result);
     }
@@ -31,7 +31,7 @@ public class ReportTests
 
         // Act
         var result = report.Print(PrintFormat.PNG);
-        
+
         // Assert
         Assert.True(result);
     }
