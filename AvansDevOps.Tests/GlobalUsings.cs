@@ -51,13 +51,25 @@ public class GlobalUsings
             1,
             "Sprint 1",
             DateTime.Now,
-            DateTime.Now,
+            DateTime.Now.AddDays(14),
             new ScrumMaster("ScrumMaster"),
             new List<Developer>()
         );
         sprint.SetParent(new Project("project", new ProductOwner("product", "product owner")));
         sprint.SetPipeLine("test");
         return sprint;
+    }
+
+    public static ReviewSprint CreateReviewSprint()
+    {
+        return new ReviewSprint(
+            1,
+            "Sprint 1",
+            DateTime.Now,
+            DateTime.Now.AddDays(14),
+            new ScrumMaster("ScrumMaster"),
+            new List<Developer>()
+        );
     }
 
 

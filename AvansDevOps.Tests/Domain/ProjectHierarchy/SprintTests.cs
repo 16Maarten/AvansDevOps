@@ -81,7 +81,7 @@ public class SprintTests
     public void Test_IsSprintFinished1()
     {
         // Arrange
-        var sprint = CreateReleaseSprint();
+        var sprint = GlobalUsings.CreateReleaseSprint();
         // Act
         var result = sprint.IsSprintFinished();
         // Assert
@@ -92,7 +92,7 @@ public class SprintTests
     public void Test_IsSprintFinished2()
     {
         // Arrange
-        var sprint = CreateReleaseSprint();
+        var sprint = GlobalUsings.CreateReleaseSprint();
         sprint.EndDate = DateTime.Now.AddDays(-10);
         // Act
         var result = sprint.IsSprintFinished();
@@ -101,22 +101,13 @@ public class SprintTests
         Assert.Equal(Status.Finished, sprint.Status);
     }
 
-    //write test for method SprintSummary
     [Fact]
     public void Test_SprintSummary1()
     {
         // Arrange
-        var ScrumMaster = new ScrumMaster("ScrumMaster");
-        var sprint = new ReviewSprint(
-            1,
-            "Sprint 1",
-            DateTime.Now,
-            DateTime.Now.AddDays(14),
-            ScrumMaster,
-            new List<Developer>()
-        );
+        var sprint = GlobalUsings.CreateReviewSprint();
         // Act
-        var result = sprint.CloseSprint("Sprint is goed gegaan", ScrumMaster);
+        var result = sprint.CloseSprint("Sprint is goed gegaan", sprint.ScrumMaster);
         // Assert
         Assert.True(result);
     }
@@ -125,18 +116,10 @@ public class SprintTests
     public void Test_SprintSummary2()
     {
         // Arrange
-        var ScrumMaster = new ScrumMaster("ScrumMaster");
-        var developer = new Developer("Dev");
-        var sprint = new ReviewSprint(
-            1,
-            "Sprint 1",
-            DateTime.Now,
-            DateTime.Now.AddDays(14),
-            ScrumMaster,
-            new List<Developer>()
-        );
+        var sprint = GlobalUsings.CreateReviewSprint();
+
         // Act
-        var result = sprint.CloseSprint("Sprint is goed gegaan", developer);
+        var result = sprint.CloseSprint("Sprint is goed gegaan", new Developer("Dev"));
         // Assert
         Assert.False(result);
     }
