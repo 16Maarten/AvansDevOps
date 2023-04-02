@@ -2,7 +2,7 @@
 using AvansDevOps.App.DomainServices.FactoryInterfaces;
 
 namespace AvansDevOps.App.Infrastructure.Factories.ScrumMasterFactory;
-
+// FACTORY PATTERN
 public class SQLDAOScrumMasterFactory : IDAOScrumMasterFactory
 {
     public string connectionUrl { get; private set; }

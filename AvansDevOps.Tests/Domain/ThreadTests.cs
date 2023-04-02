@@ -43,8 +43,10 @@ public class ThreadTests
     {
         // Arrange
         var thread = GlobalUsings.CreateThread();
+
         // Act
         var result = thread.ToStringWithoutNested();
+
         // Assert
         using (new AssertionScope())
         {
@@ -59,8 +61,10 @@ public class ThreadTests
     {
         // Arrange
         var thread = GlobalUsings.CreateThread();
+
         // Act
         var result = thread.ToString();
+
         // Assert
         using (new AssertionScope())
         {
@@ -109,6 +113,7 @@ public class ThreadTests
 
         // Act
         var result = thread.ItemIsNotDoneState();
+
         // Assert
         Assert.True(result);
     }

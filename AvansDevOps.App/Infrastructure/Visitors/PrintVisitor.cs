@@ -2,7 +2,7 @@
 using AvansDevOps.App.Domain.Users;
 
 namespace AvansDevOps.App.Infrastructure.Visitors;
-
+// VISITOR PATTERN
 public class PrintVisitor : Visitor
 {
     public override void VisitActivity(Activity activity)

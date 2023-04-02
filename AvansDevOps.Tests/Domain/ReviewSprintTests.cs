@@ -8,8 +8,10 @@ public class ReviewSprintTests
     {
         // Arrange
         var sprint = GlobalUsings.CreateReviewSprint();
+
         // Act
         var result = sprint.CloseSprint("Sprint is goed gegaan", sprint.ScrumMaster);
+
         // Assert
         Assert.True(result);
     }
@@ -22,6 +24,7 @@ public class ReviewSprintTests
 
         // Act
         var result = sprint.CloseSprint("Sprint is goed gegaan", new Developer("Dev"));
+
         // Assert
         Assert.False(result);
     }

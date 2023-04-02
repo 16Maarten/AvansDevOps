@@ -1,7 +1,7 @@
 ﻿using AvansDevOps.App.Infrastructure.Services;
 
 namespace AvansDevOps.App.Domain.Pipelines;
-
+// TEMPLATE PATTERN
 public abstract class Pipeline
 {
     private PublisherService _publisher;

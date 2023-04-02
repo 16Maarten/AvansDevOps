@@ -2,7 +2,7 @@
 using AvansDevOps.App.DomainServices;
 
 namespace AvansDevOps.App.Infrastructure.Services;
-
+// OBSERVABLE PATTERN
 public class PublisherService
 {
     public List<ISubscriber> Subscribers { get; private set; } = new List<ISubscriber>();

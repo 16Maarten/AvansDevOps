@@ -2,7 +2,7 @@
 using AvansDevOps.App.DomainServices.FactoryInterfaces;
 
 namespace AvansDevOps.App.Infrastructure.Factories.DeveloperFactory;
-
+// FACTORY PATTERN
 public class SQLDAODeveloperFactory : IDAODeveloperFactory
 {
     public string connectionUrl { get; private set; }

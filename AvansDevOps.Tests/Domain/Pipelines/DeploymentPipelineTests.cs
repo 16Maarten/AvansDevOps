@@ -35,7 +35,7 @@ public class DeploymentPipelineTests
         var deploymentPipeline = new DeploymentPipeline();
 
         // Act
-        var result =  deploymentPipeline.IsCancelled();
+        var result = deploymentPipeline.IsCancelled();
 
         // Assert
         using (new AssertionScope())

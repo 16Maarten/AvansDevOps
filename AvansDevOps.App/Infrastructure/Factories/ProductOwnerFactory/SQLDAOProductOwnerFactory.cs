@@ -2,7 +2,7 @@
 using AvansDevOps.App.DomainServices.FactoryInterfaces;
 
 namespace AvansDevOps.App.Infrastructure.Factories.ProductOwnerFactory;
-
+// FACTORY PATTERN
 public class SQLDAOProductOwnerFactory : IDAOProductOwnerFactory
 {
     public string connectionUrl { get; private set; }

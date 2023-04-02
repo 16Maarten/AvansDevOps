@@ -29,8 +29,10 @@ public class VisitorTests
         sprints.Add(sprint);
         builder.SetSprints(sprints);
         var buildProject = builder.GetResult();
+
         // Act
         buildProject.AcceptVisitor(visitor);
+
         // Assert
         Assert.Equal("project", "project");
     }

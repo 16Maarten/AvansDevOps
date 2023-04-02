@@ -2,7 +2,8 @@
 using AvansDevOps.App.Infrastructure.Services;
 
 namespace AvansDevOps.App.Domain.WorkItemStates;
-
+// STATE PATTERN
+// OBSERVER PATTERN
 public abstract class BacklogItemState
 {
     public PublisherService PublisherService = new PublisherService();

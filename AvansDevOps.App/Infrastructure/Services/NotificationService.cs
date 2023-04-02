@@ -5,7 +5,7 @@ using AvansDevOps.App.Infrastructure.Adapters;
 using AvansDevOps.App.Infrastructure.Notifiers;
 
 namespace AvansDevOps.App.Infrastructure.Services;
-
+// STRATEGY PATTERN (met afhankelijkheid naar concrete klassen, moest vanwege verschille media-types)
 public class NotificationService : ISubscriber
 {
     private INotifier _notifier { get; set; }
