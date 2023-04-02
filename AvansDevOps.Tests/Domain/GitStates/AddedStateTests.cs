@@ -1,12 +1,12 @@
 namespace AvansDevOps.Tests.Domain.GitStates;
 
-public class CommittedStateTests
+public class AddedStateTests
 {
     [Fact]
     public void Test_ToStateNoGit()
     {
         // Arrange
-        var state = new CommittedState(new Dictionary<string, List<string>>());
+        var state = new AddedState(new List<string>());
 
         // Act
         var result = state.ToStateNoGit();
@@ -19,7 +19,7 @@ public class CommittedStateTests
     public void Test_ToStateAdded()
     {
         // Arrange
-        var state = new CommittedState(GlobalUsings.CreateCommits());
+        var state = new AddedState(GlobalUsings.CreateChanges());
 
         // Act
         var result = state.ToStateAdded("codesnippet");
@@ -29,7 +29,6 @@ public class CommittedStateTests
         {
             Assert.IsType<AddedState>(result);
             result.AddedChanges.Contains("codesnippet");
-            result.AddedCommits["commit1"].Contains("code1");
         }
     }
 
@@ -37,33 +36,33 @@ public class CommittedStateTests
     public void Test_ToStateCommitted()
     {
         // Arrange
-        var state = new CommittedState(GlobalUsings.CreateCommits());
+        var state = new AddedState(GlobalUsings.CreateChanges());
 
         // Act
         var result = state.ToStateCommitted("commitmessage");
 
         // Assert
-        Assert.Equal(state, result);
+        Assert.IsType<CommittedState>(result);
     }
 
     [Fact]
     public void Test_ToStateNoGitByPush()
     {
         // Arrange
-        var state = new CommittedState(GlobalUsings.CreateCommits());
+        var state = new AddedState(GlobalUsings.CreateChanges());
 
         // Act
         var result = state.ToStateNoGitByPush("workitemtitle", "branch");
 
         // Assert
-        Assert.IsType<NoGitState>(result);
+        Assert.IsType<AddedState>(result);
     }
 
     [Fact]
     public void Test_SwitchBranch()
     {
         // Arrange
-        var state = new CommittedState(GlobalUsings.CreateCommits());
+        var state = new AddedState(GlobalUsings.CreateChanges());
 
         // Act
         var result = state.SwitchBranch("branch");
@@ -71,9 +70,8 @@ public class CommittedStateTests
         // Assert
         using (new AssertionScope())
         {
-            Assert.IsType<NoGitState>(result.Item1);
-            Assert.IsType<string>(result.Item2);
-            result.Item1.AddedCommits["commit1"].Contains("code1");
+            Assert.IsType<AddedState>(result.Item1);
+            Assert.Null(result.Item2);
         }
     }
 }

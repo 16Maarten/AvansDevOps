@@ -1,6 +1,4 @@
-using AvansDevOps.App.Domain.Users;
 using AvansDevOps.App.Infrastructure.Builders;
-using System.Runtime.Intrinsics.X86;
 
 namespace AvansDevOps.Tests.Domain;
 

@@ -7,7 +7,7 @@ namespace AvansDevOps.App.Domain;
 
 public class Thread : Responsive
 {
-    private string _title;
+    public string _title { get; private set; }
     public BacklogItem BacklogItem { get; set; }
     private ICollection<Developer> _developers { get; set; }
     private PublisherService _publisherService = new PublisherService();
@@ -24,7 +24,6 @@ public class Thread : Responsive
     {
         if (ItemIsNotDoneState()) base.AddReply(reply);
         _publisherService.NotifyObservers($"NEW MESSAGE FOR THREAD {_title}\n[{reply.Person.Name}] - {reply.Message}\n{reply.DateTime.ToLongDateString()}");
-
     }
 
     public override void RemoveReply(Reply reply)

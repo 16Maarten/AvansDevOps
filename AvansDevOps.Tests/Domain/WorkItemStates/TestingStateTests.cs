@@ -1,24 +1,10 @@
-using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
-
 namespace AvansDevOps.Tests.Domain;
 
 public class TestingSateStateTests
 {
     private BacklogItem CreateBacklogItem()
     {
-        var sprint = new ReleaseSprint(
-            1,
-            "Sprint 1",
-            DateTime.Now,
-            DateTime.Now,
-            new ScrumMaster("ScrumMaster"),
-            new List<Developer>()
-        );
-        var developer = new Developer("developer");
-        var backlogItem = new BacklogItem(1, "story", "story 1", developer, 5);
-        backlogItem.Tester = developer;
-        backlogItem.SetParent(sprint);
+        var backlogItem = GlobalUsings.CreateBacklogItem();
         backlogItem.ToDoing();
         backlogItem.ToReadyForTesting();
         backlogItem.ToTesting();

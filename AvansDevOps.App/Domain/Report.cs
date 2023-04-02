@@ -17,8 +17,11 @@ public class Report
         _report = report;
     }
 
-    public void Print()
+    public bool Print(PrintFormat format)
     {
-        _printer.Print($"{_header.ToString()}\n{_report}\n{_footer.ToString()}");
+        if (format == PrintFormat.PDF) _printer = new PdfPrinter();
+        else if (format == PrintFormat.PNG) _printer = new PngPrinter();
+
+        return _printer.Print($"{(_header != null ? _header.ToString() : "")}\n{_report}\n{(_footer != null ? _footer.ToString() : "")}");
     }
 }

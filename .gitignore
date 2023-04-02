@@ -199,6 +199,9 @@ Icon?
 # Favorites
 .cr/
 
+# Generated export file
+Exports/
+
 # dotnet stuff
 project.lock.json
 
