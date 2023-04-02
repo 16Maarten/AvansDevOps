@@ -108,7 +108,7 @@ public class SprintTests
     public void Test_IsSprintFinished1()
     {
         // Arrange
-        var sprint = CreateReleaseSprint();
+        var sprint = GlobalUsings.CreateReleaseSprint();
         // Act
         var result = sprint.IsSprintFinished();
         // Assert
@@ -119,7 +119,7 @@ public class SprintTests
     public void Test_IsSprintFinished2()
     {
         // Arrange
-        var sprint = CreateReleaseSprint();
+        var sprint = GlobalUsings.CreateReleaseSprint();
         sprint.EndDate = DateTime.Now.AddDays(-10);
         // Act
         var result = sprint.IsSprintFinished();
@@ -128,7 +128,6 @@ public class SprintTests
         Assert.Equal(Status.Finished, sprint.Status);
     }
 
-    //write test for method SprintSummary
     [Fact]
     public void Test_RestartPipeline()
     {
