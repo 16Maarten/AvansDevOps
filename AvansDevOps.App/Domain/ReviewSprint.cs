@@ -17,7 +17,7 @@ public class ReviewSprint : Sprint
     )
         : base(id, name, startDate, endDate, scrumMaster, developers) { }
 
-    public bool FinishSprint(string summary, Person user)
+    public bool CloseSprint(string summary, Person user)
     {
         if (this.IsAuthorized(user))
         {

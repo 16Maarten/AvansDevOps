@@ -122,4 +122,17 @@ public abstract class Sprint : Composite
         });
         return storyPoints;
     }
+
+    public bool IsSprintFinished()
+    {
+        if (EndDate >= DateTime.Now)
+        {
+            return false;
+        }
+        else
+        {
+            Status = Status.Finished;
+            return true;
+        }
+    }
 }
