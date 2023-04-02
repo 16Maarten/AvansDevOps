@@ -7,13 +7,20 @@ public class ThreadTests
     {
         // Arrange
         var thread = GlobalUsings.CreateThread();
-        var reply = new Reply("reply", new Developer("developer"));
+        var reply = GlobalUsings.CreateReply();
+        var subscriberMock = GlobalUsings.CreateSubscriberMock();
+
+        thread._publisherService.AddObserver(subscriberMock.Object);
 
         // Act
         thread.AddReply(reply);
 
         // Assert
-        Assert.Contains(reply, thread.Replies);
+        using (new AssertionScope())
+        {
+            Assert.Contains(reply, thread.Replies);
+            subscriberMock.Verify(x => x.Update(It.Is<string>(x => x.Contains($"NEW MESSAGE FOR THREAD {thread._title}\n[{reply.Person.Name}] - {reply.Message}")), It.IsAny<Person[]>()), Times.Once);
+        }
     }
 
     [Fact]
@@ -21,7 +28,7 @@ public class ThreadTests
     {
         // Arrange
         var thread = GlobalUsings.CreateThread();
-        var reply = new Reply("reply", new Developer("developer"));
+        var reply = GlobalUsings.CreateReply();
         thread.AddReply(reply);
 
         // Act
@@ -68,7 +75,7 @@ public class ThreadTests
     {
         // Arrange
         var thread = GlobalUsings.CreateThread();
-        var reply = new Reply("reply", new Developer("developer"));
+        var reply = GlobalUsings.CreateReply();
         thread.BacklogItem.SprintBoardState = new DoneState();
 
         // Act
@@ -83,7 +90,7 @@ public class ThreadTests
     {
         // Arrange
         var thread = GlobalUsings.CreateThread();
-        var reply = new Reply("reply", new Developer("developer"));
+        var reply = GlobalUsings.CreateReply();
         thread.AddReply(reply);
         thread.BacklogItem.SprintBoardState = new DoneState();
 

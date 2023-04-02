@@ -18,8 +18,10 @@ public class DoneStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToTodo();
+
         // Assert
         Assert.IsType<DoneState>(backlogItem.SprintBoardState);
     }
@@ -29,8 +31,10 @@ public class DoneStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToDoing();
+
         // Assert
         Assert.IsType<DoneState>(backlogItem.SprintBoardState);
     }
@@ -40,8 +44,10 @@ public class DoneStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToReadyForTesting();
+
         // Assert
         Assert.IsType<DoneState>(backlogItem.SprintBoardState);
     }
@@ -51,8 +57,10 @@ public class DoneStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToTesting();
+
         // Assert
         Assert.IsType<DoneState>(backlogItem.SprintBoardState);
     }
@@ -62,8 +70,10 @@ public class DoneStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToTested();
+
         // Assert
         Assert.IsType<DoneState>(backlogItem.SprintBoardState);
     }
@@ -73,8 +83,10 @@ public class DoneStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToDone();
+
         // Assert
         Assert.IsType<DoneState>(backlogItem.SprintBoardState);
     }

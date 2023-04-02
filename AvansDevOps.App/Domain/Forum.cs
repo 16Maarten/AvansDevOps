@@ -6,7 +6,7 @@ public class Forum
 {
     private string _name;
     private string _description;
-    private List<Thread> _threads = new List<Thread>();
+    public List<Thread> Threads { get; private set; } = new List<Thread>();
 
     public Forum(string name, string description)
     {
@@ -16,20 +16,20 @@ public class Forum
 
     public void AddThread(Thread thread)
     {
-        _threads.Add(thread);
+        Threads.Add(thread);
         thread.Person.Threads.Add(thread);
     }
 
     public void RemoveThread(Thread thread)
     {
         thread.Person.Threads.Remove(thread);
-        _threads.Remove(thread);
+        Threads.Remove(thread);
     }
 
     public override string ToString()
     {
         var threads = new StringBuilder();
-        foreach (Thread thread in _threads)
+        foreach (Thread thread in Threads)
         {
             threads.AppendLine(thread.ToString());
         }

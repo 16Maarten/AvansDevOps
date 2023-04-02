@@ -1,5 +1,3 @@
-using AvansDevOps.App.Domain.ProjectHierarchy;
-
 namespace AvansDevOps.Tests.Domain;
 
 public class ToDoStateTests
@@ -9,8 +7,10 @@ public class ToDoStateTests
     {
         // Arrange
         var backlogItem = GlobalUsings.CreateBacklogItem();
+
         // Act
         backlogItem.ToTodo();
+
         // Assert
         Assert.IsType<ToDoState>(backlogItem.SprintBoardState);
     }
@@ -20,8 +20,10 @@ public class ToDoStateTests
     {
         // Arrange
         var backlogItem = GlobalUsings.CreateBacklogItem();
+
         // Act
         backlogItem.ToDoing();
+
         // Assert
         Assert.IsType<DoingState>(backlogItem.SprintBoardState);
     }
@@ -31,8 +33,10 @@ public class ToDoStateTests
     {
         // Arrange
         var backlogItem = GlobalUsings.CreateBacklogItem();
+
         // Act
         backlogItem.ToReadyForTesting();
+
         // Assert
         Assert.IsType<ToDoState>(backlogItem.SprintBoardState);
     }
@@ -42,8 +46,10 @@ public class ToDoStateTests
     {
         // Arrange
         var backlogItem = GlobalUsings.CreateBacklogItem();
+
         // Act
         backlogItem.ToTesting();
+
         // Assert
         Assert.IsType<ToDoState>(backlogItem.SprintBoardState);
     }
@@ -53,8 +59,10 @@ public class ToDoStateTests
     {
         // Arrange
         var backlogItem = GlobalUsings.CreateBacklogItem();
+
         // Act
         backlogItem.ToTested();
+
         // Assert
         Assert.IsType<ToDoState>(backlogItem.SprintBoardState);
     }
@@ -64,8 +72,10 @@ public class ToDoStateTests
     {
         // Arrange
         var backlogItem = GlobalUsings.CreateBacklogItem();
+
         // Act
         backlogItem.ToDone();
+
         // Assert
         Assert.IsType<ToDoState>(backlogItem.SprintBoardState);
     }

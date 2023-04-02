@@ -73,4 +73,8 @@ public abstract class Pipeline
         _isCancelled = false;
         return false;
     }
+    public void ResetCancel()
+    {
+        _isCancelled = false;
+    }
 }

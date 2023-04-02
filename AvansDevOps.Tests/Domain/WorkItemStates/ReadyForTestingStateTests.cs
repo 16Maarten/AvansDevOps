@@ -15,8 +15,10 @@ public class ReadyForTestingSateStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToTodo();
+
         // Assert
         Assert.IsType<ReadyForTestingState>(backlogItem.SprintBoardState);
     }
@@ -26,8 +28,10 @@ public class ReadyForTestingSateStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToDoing();
+
         // Assert
         Assert.IsType<ReadyForTestingState>(backlogItem.SprintBoardState);
     }
@@ -37,8 +41,10 @@ public class ReadyForTestingSateStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToReadyForTesting();
+
         // Assert
         Assert.IsType<ReadyForTestingState>(backlogItem.SprintBoardState);
     }
@@ -48,8 +54,10 @@ public class ReadyForTestingSateStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToTesting();
+
         // Assert
         Assert.IsType<TestingState>(backlogItem.SprintBoardState);
     }
@@ -59,8 +67,10 @@ public class ReadyForTestingSateStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToTested();
+
         // Assert
         Assert.IsType<ReadyForTestingState>(backlogItem.SprintBoardState);
     }
@@ -70,8 +80,10 @@ public class ReadyForTestingSateStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToDone();
+
         // Assert
         Assert.IsType<ReadyForTestingState>(backlogItem.SprintBoardState);
     }

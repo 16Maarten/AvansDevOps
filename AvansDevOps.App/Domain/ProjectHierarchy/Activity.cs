@@ -28,7 +28,6 @@ public class Activity : Component, IWorkItem
 
     public void ToTodo()
     {
-        //Voeg ScrumMaster ipv Tester toe aan notificatie-ontvangers
         SprintBoardState = SprintBoardState.ToStateToDo(Title, ((Sprint)this.GetParent().GetParent()).ScrumMaster);
     }
 

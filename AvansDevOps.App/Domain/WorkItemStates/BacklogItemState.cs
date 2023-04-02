@@ -12,9 +12,9 @@ public abstract class BacklogItemState
         PublisherService.AddObserver(new NotificationService());
     }
 
-    public abstract BacklogItemState ToStateToDo(string itemTile, Person scrumMaster);
+    public abstract BacklogItemState ToStateToDo(string itemTitle, Person scrumMaster);
     public abstract BacklogItemState ToStateDoing();
-    public abstract BacklogItemState ToStateReadyForTesting(string itemTile, Person tester);
+    public abstract BacklogItemState ToStateReadyForTesting(string itemTitle, Person tester);
     public abstract BacklogItemState ToStateTesting();
     public abstract BacklogItemState ToStateTested();
     public abstract BacklogItemState ToStateDone();

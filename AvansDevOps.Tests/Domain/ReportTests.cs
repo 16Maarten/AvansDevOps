@@ -7,10 +7,6 @@ public class ReportTests
     {
         // Arrange
         var report = new Report("Test");
-        var mock = new Mock<IPrinter>();
-        mock
-            .Setup(x => x.Print(It.IsAny<string>()))
-            .Returns(true);
 
         // Act
         var result = report.Print(PrintFormat.PDF);
@@ -24,10 +20,6 @@ public class ReportTests
     {
         // Arrange
         var report = new Report("Test");
-        var mock = new Mock<IPrinter>();
-        mock
-            .Setup(x => x.Print(It.IsAny<string>()))
-            .Returns(true);
 
         // Act
         var result = report.Print(PrintFormat.PNG);

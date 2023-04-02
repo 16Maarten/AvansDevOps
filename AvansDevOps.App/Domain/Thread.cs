@@ -10,7 +10,7 @@ public class Thread : Responsive
     public string _title { get; private set; }
     public BacklogItem BacklogItem { get; set; }
     private ICollection<Developer> _developers { get; set; }
-    private PublisherService _publisherService = new PublisherService();
+    public PublisherService _publisherService { get; private set; } = new PublisherService();
 
     public Thread(string title, string message, Person person, BacklogItem BacklogItem, ICollection<Developer> developers) : base(message, person)
     {
@@ -22,8 +22,12 @@ public class Thread : Responsive
 
     public override void AddReply(Reply reply)
     {
-        if (ItemIsNotDoneState()) base.AddReply(reply);
-        _publisherService.NotifyObservers($"NEW MESSAGE FOR THREAD {_title}\n[{reply.Person.Name}] - {reply.Message}\n{reply.DateTime.ToLongDateString()}");
+        if (ItemIsNotDoneState())
+        {
+            base.AddReply(reply);
+            _publisherService.NotifyObservers($"NEW MESSAGE FOR THREAD {_title}\n[{reply.Person.Name}] - {reply.Message}\n{reply.DateTime.ToLongDateString()}");
+        }
+
     }
 
     public override void RemoveReply(Reply reply)

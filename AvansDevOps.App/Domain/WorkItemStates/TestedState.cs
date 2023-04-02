@@ -4,7 +4,7 @@ namespace AvansDevOps.App.Domain.WorkItemStates;
 
 public class TestedState : BacklogItemState
 {
-    public override BacklogItemState ToStateToDo(string itemTile, Person scrumMaster)
+    public override BacklogItemState ToStateToDo(string itemTitle, Person scrumMaster)
     {
         return new ToDoState();
     }
@@ -15,7 +15,7 @@ public class TestedState : BacklogItemState
         return new TestedState();
     }
 
-    public override BacklogItemState ToStateReadyForTesting(string itemTile, Person tester)
+    public override BacklogItemState ToStateReadyForTesting(string itemTitle, Person tester)
     {
         return new ReadyForTestingState();
     }

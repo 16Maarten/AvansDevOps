@@ -20,6 +20,27 @@ public class SprintTests
     }
 
     [Fact]
+    public void Test_RunPipeline_Fail()
+    {
+        // Arrange
+        var sprint = GlobalUsings.CreateReleaseSprint();
+        var subscriberMock = GlobalUsings.CreateSubscriberMock();
+        sprint.PublisherService.AddObserver(subscriberMock.Object);
+        sprint.Pipeline.Cancel();
+
+        // Act
+        sprint.RunPipeline();
+
+        // Assert
+        using (new AssertionScope())
+        {
+            Assert.Equal(Status.Open, sprint.Status);
+            subscriberMock.Verify(x => x.Update(It.Is<string>(x => x.Contains($"Pipeline {sprint.Name} failed")), It.IsAny<Person[]>()), Times.Once);
+            Assert.False(sprint.PipelineRunning);
+        }
+    }
+
+    [Fact]
     public void Test_CancelPipeline()
     {
         // Arrange
@@ -38,12 +59,19 @@ public class SprintTests
     {
         // Arrange
         var sprint = GlobalUsings.CreateReleaseSprint();
+        var subscriberMock = GlobalUsings.CreateSubscriberMock();
+        sprint.PublisherService.AddObserver(subscriberMock.Object);
 
         // Act
         sprint.Close();
 
         // Assert
-        Assert.Equal(Status.Closed, sprint.Status);
+
+        using (new AssertionScope())
+        {
+            Assert.Equal(Status.Closed, sprint.Status);
+            subscriberMock.Verify(x => x.Update(It.Is<string>(x => x.Contains($"Sprint {sprint.Name} is closed")), It.IsAny<Person[]>()), Times.Once);
+        }
     }
 
     [Fact]
@@ -62,7 +90,6 @@ public class SprintTests
         Assert.Equal(1, result);
     }
 
-    //wrirte another test for the method GetStoryPointsDeveloper
     [Fact]
     public void Test_GetStoryPointsDeveloper2()
     {
@@ -103,40 +130,55 @@ public class SprintTests
 
     //write test for method SprintSummary
     [Fact]
-    public void Test_SprintSummary1()
+    public void Test_RestartPipeline()
     {
         // Arrange
-        var ScrumMaster = new ScrumMaster("ScrumMaster");
-        var sprint = new ReviewSprint(
-            1,
-            "Sprint 1",
-            DateTime.Now,
-            DateTime.Now.AddDays(14),
-            ScrumMaster,
-            new List<Developer>()
-        );
+        var sprint = GlobalUsings.CreateReleaseSprint();
+        sprint.PipelineRunning = true;
+
         // Act
-        var result = sprint.CloseSprint("Sprint is goed gegaan", ScrumMaster);
+        sprint.RestartPipeline(sprint.ScrumMaster);
+
+        // Assert
+        Assert.Equal(Status.Closed, sprint.Status);
+    }
+
+    [Fact]
+    public void Test_RestartPipeline_NotAuthorized()
+    {
+        // Arrange
+        var sprint = GlobalUsings.CreateReleaseSprint();
+        sprint.PipelineRunning = true;
+
+        // Act
+        sprint.RestartPipeline(new Developer("dev"));
+
+        // Assert
+        Assert.Equal(Status.Open, sprint.Status);
+    }
+
+    [Fact]
+    public void Test_IsAuthorized()
+    {
+        // Arrange
+        var sprint = GlobalUsings.CreateReleaseSprint();
+
+        // Act
+        var result = sprint.IsAuthorized(sprint.ScrumMaster);
+
         // Assert
         Assert.True(result);
     }
 
     [Fact]
-    public void Test_SprintSummary2()
+    public void Test_IsAuthorized_False()
     {
         // Arrange
-        var ScrumMaster = new ScrumMaster("ScrumMaster");
-        var developer = new Developer("Dev");
-        var sprint = new ReviewSprint(
-            1,
-            "Sprint 1",
-            DateTime.Now,
-            DateTime.Now.AddDays(14),
-            ScrumMaster,
-            new List<Developer>()
-        );
+        var sprint = GlobalUsings.CreateReleaseSprint();
+
         // Act
-        var result = sprint.CloseSprint("Sprint is goed gegaan", developer);
+        var result = sprint.IsAuthorized(new Developer("Dev"));
+
         // Assert
         Assert.False(result);
     }

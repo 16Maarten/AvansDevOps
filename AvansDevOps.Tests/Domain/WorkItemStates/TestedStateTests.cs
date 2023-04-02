@@ -17,8 +17,10 @@ public class TestedStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToTodo();
+
         // Assert
         Assert.IsType<ToDoState>(backlogItem.SprintBoardState);
     }
@@ -28,8 +30,10 @@ public class TestedStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToDoing();
+
         // Assert
         Assert.IsType<TestedState>(backlogItem.SprintBoardState);
     }
@@ -39,8 +43,10 @@ public class TestedStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToReadyForTesting();
+
         // Assert
         Assert.IsType<ReadyForTestingState>(backlogItem.SprintBoardState);
     }
@@ -50,8 +56,10 @@ public class TestedStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToTesting();
+
         // Assert
         Assert.IsType<TestedState>(backlogItem.SprintBoardState);
     }
@@ -61,8 +69,10 @@ public class TestedStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToTested();
+
         // Assert
         Assert.IsType<TestedState>(backlogItem.SprintBoardState);
     }
@@ -72,8 +82,10 @@ public class TestedStateTests
     {
         // Arrange
         var backlogItem = CreateBacklogItem();
+
         // Act
         backlogItem.ToDone();
+
         // Assert
         Assert.IsType<DoneState>(backlogItem.SprintBoardState);
     }
@@ -87,8 +99,10 @@ public class TestedStateTests
         backlogItem.AddComponent(
             new Activity(1, "Inlog pagina", "Maak een inlog pagina", developer, 2)
         );
+
         // Act
         backlogItem.ToDone();
+
         // Assert
         Assert.IsType<TestedState>(backlogItem.SprintBoardState);
     }
@@ -102,8 +116,10 @@ public class TestedStateTests
         var activity = new Activity(1, "Inlog pagina", "Maak een inlog pagina", developer, 2);
         activity.SprintBoardState = new DoneState();
         backlogItem.AddComponent(activity);
+
         // Act
         backlogItem.ToDone();
+
         // Assert
         Assert.IsType<DoneState>(backlogItem.SprintBoardState);
     }

@@ -14,7 +14,7 @@ public abstract class Sprint : Composite
     public Status Status { get; set; } = Status.Open;
     public ScrumMaster ScrumMaster { get; set; }
     public ICollection<Developer> Developers { get; set; }
-    private Pipeline _pipeline { get; set; } = new TestPipeline();
+    public Pipeline Pipeline { get; private set; } = new TestPipeline();
     public PublisherService PublisherService = new PublisherService();
     public bool PipelineRunning { get; set; } = false;
 
@@ -47,9 +47,9 @@ public abstract class Sprint : Composite
         if (!PipelineRunning)
         {
             if (pipeline == "deploy")
-                _pipeline = new DeploymentPipeline();
+                Pipeline = new DeploymentPipeline();
             else if (pipeline == "test")
-                _pipeline = new TestPipeline();
+                Pipeline = new TestPipeline();
             else
                 throw new Exception("Pipeline not found");
         }
@@ -58,7 +58,7 @@ public abstract class Sprint : Composite
     public void RunPipeline()
     {
         PipelineRunning = true;
-        if (_pipeline.TemplateMethod())
+        if (Pipeline.TemplateMethod())
             Close();
         else
             PublisherService.NotifyObservers($"Pipeline {Name} failed", ScrumMaster);
@@ -69,7 +69,7 @@ public abstract class Sprint : Composite
     {
         if (IsAuthorized(user))
         {
-            _pipeline.Cancel();
+            Pipeline.Cancel();
             PipelineRunning = false;
         }
     }
@@ -78,7 +78,8 @@ public abstract class Sprint : Composite
     {
         if (IsAuthorized(user))
         {
-            _pipeline.Cancel();
+            Pipeline.Cancel();
+            Pipeline.ResetCancel();
             PipelineRunning = false;
             RunPipeline();
         }
