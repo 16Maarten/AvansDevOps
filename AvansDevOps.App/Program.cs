@@ -8,7 +8,15 @@
 //using AvansDevOps.App.Infrastructure.Visitors;
 //using Thread = AvansDevOps.App.Domain.Thread;
 
+using AvansDevOps.App.Domain.ProjectHierarchy;
+using AvansDevOps.App.Domain.Users;
+using AvansDevOps.App.Domain;
+using AvansDevOps.App.Infrastructure.Builders;
+using AvansDevOps.App.Infrastructure.Visitors;
+using System.Runtime.Intrinsics.X86;
+
 Console.WriteLine();
+
 //---START FORUM-- -
 //Console.WriteLine(
 //    "------------------------------------START FORUM------------------------------------"
@@ -73,52 +81,56 @@ Console.WriteLine();
 //Console.WriteLine(
 //    "------------------------------------START PROJECT------------------------------------"
 //);
-//var project = new Project("Bioscoop", new ProductOwner("Ger", "Bioscoop"));
 
-//List<Developer> developers = new List<Developer>();
-//developers.Add(user1);
-//developers.Add(user2);
-//var sprints = new List<Sprint>();
-//var sprint = new ReleaseSprint(
-//    1,
-//    "Sprint 1",
-//    DateTime.Now,
-//    DateTime.Now.AddDays(7),
-//    new ScrumMaster("Marcel"),
-//    developers
-//);
-//sprints.Add(sprint);
-//var backlogItems = new List<BacklogItem>();
 
-//var backlogItem1 = new BacklogItem(1, "Bouw FE", "Gebruik javascript", user1, 5);
-//var backlogItem2 = new BacklogItem(2, "Bouw BE", "Gebruik C#", user2, 5);
-//backlogItems.Add(backlogItem1);
-//backlogItems.Add(backlogItem2);
-//var activities = new List<Activity>();
+var project = new Project("Bioscoop", new ProductOwner("Ger", "Bioscoop"));
+var user1 = new Developer("Mo", "user1@live.com", "user1-slack");
+var user2 = new Developer("Maarten", "user2@live.com", "user2-slack");
+List<Developer> developers = new List<Developer>();
+developers.Add(user1);
+developers.Add(user2);
+var sprints = new List<Sprint>();
+var sprint = new ReleaseSprint(
+    1,
+    "Sprint 1",
+    DateTime.Now,
+    DateTime.Now.AddDays(7),
+    new ScrumMaster("Marcel"),
+    developers
+);
+sprints.Add(sprint);
+var backlogItems = new List<BacklogItem>();
 
-//var activity1 = new Activity(1, "Inlog pagina", "Maak een inlog pagina", user1, 2);
-//var activity2 = new Activity(2, "home pagina", "Maak een home pagina", user1, 3);
-//activities.Add(activity1);
-//activities.Add(activity2);
+var backlogItem1 = new BacklogItem(1, "Bouw FE", "Gebruik javascript", user1, 5);
+var backlogItem2 = new BacklogItem(2, "Bouw BE", "Gebruik C#", user2, 5);
+backlogItems.Add(backlogItem1);
+backlogItems.Add(backlogItem2);
+var activities = new List<Activity>();
 
-//var projectBuilder = new ProjectBuilder();
+var activity1 = new Activity(1, "Inlog pagina", "Maak een inlog pagina", user1, 2);
+var activity2 = new Activity(2, "home pagina", "Maak een home pagina", user1, 3);
+activities.Add(activity1);
+activities.Add(activity2);
 
-//projectBuilder.BuildProject(project);
-//projectBuilder.SetSprints(sprints);
-//projectBuilder.SetBacklogItems(1, backlogItems);
-//projectBuilder.SetActivitys(1, 1, activities);
+var projectBuilder = new ProjectBuilder();
 
-//Project buildProject = projectBuilder.GetResult();
-//PrintVisitor printVisitor = new PrintVisitor();
+projectBuilder.BuildProject(project);
+projectBuilder.SetSprints(sprints);
+projectBuilder.SetBacklogItems(1, backlogItems);
+projectBuilder.SetActivitys(1, 1, activities);
 
-//backlogItem1.ToDoing();
-//backlogItem1.Tester = user2;
-//backlogItem1.ToReadyForTesting();
-//backlogItem1.ToTesting();
-//backlogItem1.ToTested();
-//backlogItem1.ToDone();
+Project buildProject = projectBuilder.GetResult();
+PrintVisitor printVisitor = new PrintVisitor();
 
-//buildProject.AcceptVisitor(printVisitor);
+backlogItem1.ToDoing();
+backlogItem1.Tester = user2;
+backlogItem1.ToReadyForTesting();
+backlogItem1.ToTesting();
+backlogItem1.ToTested();
+backlogItem1.ToDone();
+
+buildProject.AcceptVisitor(printVisitor);
+Console.WriteLine(printVisitor.GetReport());
 
 //Console.WriteLine(
 //    "------------------------------------END PROJECT------------------------------------\n"

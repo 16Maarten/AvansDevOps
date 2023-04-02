@@ -2,7 +2,7 @@ namespace AvansDevOps.Tests.Infrastructure.Visitors;
 
 public class VisitorTests
 {
-    private Visitor CreateVisitor()
+    private PrintVisitor CreateVisitor()
     {
         return new PrintVisitor();
     }
@@ -12,7 +12,7 @@ public class VisitorTests
     {
         // Arrange
         var visitor = CreateVisitor();
-        var project = new Project("project", new ProductOwner("product", "product owner"));
+        var project = new Project("project1", new ProductOwner("product", "product owner"));
         var builder = new ProjectBuilder();
         builder.BuildProject(project);
         List<Developer> developers = new List<Developer>();
@@ -32,8 +32,8 @@ public class VisitorTests
 
         // Act
         buildProject.AcceptVisitor(visitor);
-
+        var result = visitor.GetReport();
         // Assert
-        Assert.Equal("project", "project");
+        Assert.True(result.Contains("Marcel"));
     }
 }

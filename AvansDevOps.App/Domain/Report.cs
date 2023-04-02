@@ -2,6 +2,7 @@
 using AvansDevOps.App.Infrastructure.Printers;
 
 namespace AvansDevOps.App.Domain;
+
 // STRATEGY PATTERN// STRATEGY PATTERN (_printer)
 public class Report
 {
@@ -10,7 +11,11 @@ public class Report
     private ReportAddition _footer { get; set; }
     private IPrinter _printer { get; set; } = new PdfPrinter();
 
-    public IPrinter Printer { get { return _printer; } set { _printer = value; } }
+    public IPrinter Printer
+    {
+        get { return _printer; }
+        set { _printer = value; }
+    }
 
     public Report(string report)
     {
@@ -19,9 +24,13 @@ public class Report
 
     public bool Print(PrintFormat format)
     {
-        if (format == PrintFormat.PDF) _printer = new PdfPrinter();
-        else if (format == PrintFormat.PNG) _printer = new PngPrinter();
+        if (format == PrintFormat.PDF)
+            _printer = new PdfPrinter();
+        else if (format == PrintFormat.PNG)
+            _printer = new PngPrinter();
 
-        return _printer.Print($"{(_header != null ? _header.ToString() : "")}\n{_report}\n{(_footer != null ? _footer.ToString() : "")}");
+        return _printer.Print(
+            $"{(_header != null ? _header.ToString() : "")}\n{_report}\n{(_footer != null ? _footer.ToString() : "")}"
+        );
     }
 }

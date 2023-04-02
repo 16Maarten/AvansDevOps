@@ -4,6 +4,7 @@ using AvansDevOps.App.Infrastructure.Services;
 using AvansDevOps.App.Infrastructure.Visitors;
 
 namespace AvansDevOps.App.Domain.ProjectHierarchy;
+
 // OBSERVABLE PATTERN
 // STRATEGY PATTERN
 public abstract class Sprint : Composite
@@ -137,5 +138,12 @@ public abstract class Sprint : Composite
             Status = Status.Finished;
             return true;
         }
+    }
+
+    public void GenerateReport()
+    {
+        var printVisitor = new PrintVisitor();
+        this.AcceptVisitor(printVisitor);
+        Report = new Report(printVisitor.GetReport());
     }
 }

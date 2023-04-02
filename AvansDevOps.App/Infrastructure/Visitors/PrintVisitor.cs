@@ -2,51 +2,62 @@
 using AvansDevOps.App.Domain.Users;
 
 namespace AvansDevOps.App.Infrastructure.Visitors;
+
 // VISITOR PATTERN
 public class PrintVisitor : Visitor
 {
+    private string _report;
+
     public override void VisitActivity(Activity activity)
     {
-        Console.WriteLine("======Activity " + activity.Title + "========");
-        Console.WriteLine("Description: " + activity.Description);
-        Console.WriteLine("Developer: " + activity.Developer.Name);
+        _report += "======Activity " + activity.Title + "========\n";
+        _report += "Description: " + activity.Description;
+        _report += "\nDeveloper: " + activity.Developer.Name;
         if (activity.Tester != null)
         {
-            Console.WriteLine("Tester: " + activity.Tester.Name);
+            _report += "\nTester: " + activity.Tester.Name;
         }
-        Console.WriteLine("StoryPoints: " + activity.StoryPoints);
+        _report += "\nStoryPoints: " + activity.StoryPoints + "\n";
     }
 
     public override void VisitBacklogItem(BacklogItem backlogItem)
     {
-        Console.WriteLine("======BacklogItem " + backlogItem.Title + "========");
-        Console.WriteLine("Description: " + backlogItem.Description);
-        Console.WriteLine("Developer: " + backlogItem.Developer.Name);
+        _report += "======BacklogItem " + backlogItem.Title + "========\n";
+        _report += "Description: " + backlogItem.Description;
+        _report += "\nDeveloper: " + backlogItem.Developer.Name;
         if (backlogItem.Tester != null)
         {
-            Console.WriteLine("Tester: " + backlogItem.Tester.Name);
+            _report += "\nTester: " + backlogItem.Tester.Name;
         }
-        Console.WriteLine("StoryPoints: " + backlogItem.StoryPoints);
+        _report += "\nStoryPoints: " + backlogItem.StoryPoints + "\n";
     }
 
     public override void VisitProject(Project project)
     {
-        Console.WriteLine("======Project " + project.Name + "========");
-        Console.WriteLine("ProductOwner: " + project.ProductOwner.Name);
+        _report +=
+            "======Project "
+            + project.Name
+            + "========\nProductOwner: "
+            + project.ProductOwner.Name
+            + "\n";
     }
 
     public override void VisitSprint(Sprint sprint)
     {
-        Console.WriteLine("======Sprint " + sprint.Name + "========");
-        Console.WriteLine(
-            "Time: " + sprint.StartDate.ToString() + " - " + sprint.EndDate.ToString()
-        );
-        Console.WriteLine("Status: " + sprint.Status.ToString());
-        Console.WriteLine("ScrumMaster: " + sprint.ScrumMaster.Name);
-        Console.WriteLine("Developers: ");
+        _report += "======Sprint " + sprint.Name + "========\n";
+        _report +=
+            "Time: " + sprint.StartDate.ToString() + " - " + sprint.EndDate.ToString() + "\n";
+        _report += "Status: " + sprint.Status.ToString();
+        _report += "\nScrumMaster: " + sprint.ScrumMaster.Name;
+        _report += "\nDevelopers:\n";
         var developers = new List<Developer>(sprint.Developers);
         developers.ForEach(
-            dev => Console.WriteLine(dev.Name + " : " + sprint.GetStoryPointsDeveloper(dev))
+            dev => _report += dev.Name + " : " + sprint.GetStoryPointsDeveloper(dev) + "\n"
         );
+    }
+
+    public string GetReport()
+    {
+        return _report;
     }
 }
