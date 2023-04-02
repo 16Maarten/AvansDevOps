@@ -9,18 +9,26 @@ public class PdfPrinter : IPrinter
 {
     public bool Print(string report)
     {
-        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-        PdfDocument document = new PdfDocument();
-        PdfPage page = document.AddPage();
-        XGraphics gfx = XGraphics.FromPdfPage(page);
-        XFont font = new XFont("Verdana", 10, XFontStyle.Bold);
+        try
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            PdfDocument document = new PdfDocument();
+            PdfPage page = document.AddPage();
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            XFont font = new XFont("Verdana", 10, XFontStyle.Bold);
 
-        gfx.DrawString(report, font, XBrushes.Black,
-        new XRect(0, 0, page.Width, page.Height), XStringFormats.Center);
+            gfx.DrawString(report, font, XBrushes.Black,
+            new XRect(0, 0, page.Width, page.Height), XStringFormats.Center);
 
-        string filename = $"../../../Exports/report-{DateTime.Now.ToLongDateString()}.pdf";
-        document.Save(filename);
+            string filename = $"../../../Exports/report-{DateTime.Now.ToLongDateString()}.pdf";
+            document.Save(filename);
 
-        return true;
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return false;
+        }
     }
 }

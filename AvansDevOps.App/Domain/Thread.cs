@@ -7,7 +7,7 @@ namespace AvansDevOps.App.Domain;
 
 public class Thread : Responsive
 {
-    private string _title;
+    public string _title { get; private set; }
     public BacklogItem BacklogItem { get; set; }
     private ICollection<Developer> _developers { get; set; }
     private PublisherService _publisherService = new PublisherService();

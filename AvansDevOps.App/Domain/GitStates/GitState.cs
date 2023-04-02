@@ -30,22 +30,32 @@ public abstract class GitState
     public abstract GitState ToStateNoGitByPush(string workItemTitle, string branch);
     public abstract (GitState, string?) SwitchBranch(string branch);
 
-    public void PushChanges(string workItem, string branch)
+    public virtual bool PushChanges(string workItem, string branch)
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        foreach (var committedChanges in AddedCommits)
+        try
         {
-            stringBuilder.AppendLine("--------------------------------------------");
-            stringBuilder.AppendLine($"Branch: {branch}");
-            stringBuilder.AppendLine($"Commit: {committedChanges.Key}");
-            foreach (var addedChanges in committedChanges.Value)
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var committedChanges in AddedCommits)
             {
-                stringBuilder.AppendLine($"-> {addedChanges}");
+                stringBuilder.AppendLine("--------------------------------------------");
+                stringBuilder.AppendLine($"Branch: {branch}");
+                stringBuilder.AppendLine($"Commit: {committedChanges.Key}");
+                foreach (var addedChanges in committedChanges.Value)
+                {
+                    stringBuilder.AppendLine($"-> {addedChanges}");
+                }
+                stringBuilder.AppendLine("--------------------------------------------");
             }
-            stringBuilder.AppendLine("--------------------------------------------");
-        }
 
-        File.WriteAllText($"../../../Exports/{workItem}.txt", stringBuilder.ToString());
+            File.WriteAllText($"../../../Exports/{workItem}.txt", stringBuilder.ToString());
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return false;
+        }
     }
 
     public string GetAddedChanges()
@@ -60,6 +70,7 @@ public abstract class GitState
 
         return stringBuilder.ToString();
     }
+
     public string GetCommittedChanges()
     {
         StringBuilder stringBuilder = new StringBuilder();

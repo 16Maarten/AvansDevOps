@@ -2,26 +2,11 @@ namespace AvansDevOps.Tests.Domain.ProjectHierarchy;
 
 public class SprintTests
 {
-    public ReleaseSprint CreateReleaseSprint()
-    {
-        var sprint = new ReleaseSprint(
-            1,
-            "Sprint 1",
-            DateTime.Now,
-            DateTime.Now,
-            new ScrumMaster("ScrumMaster"),
-            new List<Developer>()
-        );
-        sprint.SetParent(new Project("project", new ProductOwner("product", "product owner")));
-        sprint.SetPipeLine("test");
-        return sprint;
-    }
-
     [Fact]
     public void Test_RunPipeline()
     {
         // Arrange
-        var sprint = CreateReleaseSprint();
+        var sprint = GlobalUsings.CreateReleaseSprint();
 
         // Act
         sprint.RunPipeline();
@@ -38,7 +23,7 @@ public class SprintTests
     public void Test_CancelPipeline()
     {
         // Arrange
-        var sprint = CreateReleaseSprint();
+        var sprint = GlobalUsings.CreateReleaseSprint();
         sprint.PipelineRunning = true;
 
         // Act
@@ -52,7 +37,7 @@ public class SprintTests
     public void Test_Close()
     {
         // Arrange
-        var sprint = CreateReleaseSprint();
+        var sprint = GlobalUsings.CreateReleaseSprint();
 
         // Act
         sprint.Close();
@@ -65,7 +50,7 @@ public class SprintTests
     public void Test_GetStoryPointsDeveloper()
     {
         // Arrange
-        var sprint = CreateReleaseSprint();
+        var sprint = GlobalUsings.CreateReleaseSprint();
         var developer = new Developer("developer");
         var backlogItem = new BacklogItem(1, "story", "story 1", developer, 1);
         sprint.AddComponent(backlogItem);
@@ -81,7 +66,7 @@ public class SprintTests
     [Fact]
     public void Test_GetStoryPointsDeveloper2()
     {
-        var sprint = CreateReleaseSprint();
+        var sprint = GlobalUsings.CreateReleaseSprint();
         var developer = new Developer("developer");
         var backlogItem = new BacklogItem(1, "story", "story 1", developer, 5);
         backlogItem.AddComponent(new Activity(1, "story", "story 2", developer, 3));

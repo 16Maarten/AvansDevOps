@@ -2,16 +2,12 @@
 
 public class ReportAdditionTests
 {
-    public ReportAddition CreateReportAddition()
-    {
-        return new ReportAddition("companyName", "projectName", "version", new Bitmap(1, 1), DateTime.Now);
-    }
 
     [Fact]
     public void Test_CompanyName()
     {
         // Arrange
-        var reportAddition = CreateReportAddition();
+        var reportAddition = GlobalUsings.CreateReportAddition();
         var companyName = "companyName";
 
         // Act
@@ -25,7 +21,7 @@ public class ReportAdditionTests
     public void Test_ProjectName()
     {
         // Arrange
-        var reportAddition = CreateReportAddition();
+        var reportAddition = GlobalUsings.CreateReportAddition();
         var projectName = "projectName";
 
         // Act
@@ -39,7 +35,7 @@ public class ReportAdditionTests
     public void Test_Version()
     {
         // Arrange
-        var reportAddition = CreateReportAddition();
+        var reportAddition = GlobalUsings.CreateReportAddition();
         var version = "version";
 
         // Act
@@ -53,7 +49,7 @@ public class ReportAdditionTests
     public void Test_Logo()
     {
         // Arrange
-        var reportAddition = CreateReportAddition();
+        var reportAddition = GlobalUsings.CreateReportAddition();
         var logo = new Bitmap(1, 1);
 
         // Act
@@ -67,7 +63,7 @@ public class ReportAdditionTests
     public void Test_Date()
     {
         // Arrange
-        var reportAddition = CreateReportAddition();
+        var reportAddition = GlobalUsings.CreateReportAddition();
         var date = DateTime.Now;
 
         // Act

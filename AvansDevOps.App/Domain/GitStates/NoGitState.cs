@@ -15,7 +15,7 @@ public class NoGitState : GitState
         base.AddedChanges.Add(codeSnippet);
         Console.WriteLine("Change is added.");
         Console.WriteLine($"Changes:\n{GetAddedChanges()}");
-        return new AddedState(base.AddedChanges);
+        return new AddedState(base.AddedChanges, base.AddedCommits);
     }
 
     public override GitState ToStateCommitted(string commitMessage)
@@ -38,6 +38,6 @@ public class NoGitState : GitState
     public override (GitState, string?) SwitchBranch(string branch)
     {
         Console.WriteLine($"Switched to branch: '{branch}'.");
-        return (new NoGitState(), branch);
+        return (new NoGitState(base.AddedCommits), branch);
     }
 }

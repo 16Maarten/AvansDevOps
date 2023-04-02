@@ -1,28 +1,14 @@
+using AvansDevOps.App.Domain.ProjectHierarchy;
+
 namespace AvansDevOps.Tests.Domain;
 
 public class ToDoStateTests
 {
-    private BacklogItem CreateBacklogItem()
-    {
-        var sprint = new ReleaseSprint(
-            1,
-            "Sprint 1",
-            DateTime.Now,
-            DateTime.Now,
-            new ScrumMaster("ScrumMaster"),
-            new List<Developer>()
-        );
-        var developer = new Developer("developer");
-        var backlogItem = new BacklogItem(1, "story", "story 1", developer, 5);
-        backlogItem.SetParent(sprint);
-        return backlogItem;
-    }
-
     [Fact]
     public void Test_ToToDotState()
     {
         // Arrange
-        var backlogItem = CreateBacklogItem();
+        var backlogItem = GlobalUsings.CreateBacklogItem();
         // Act
         backlogItem.ToTodo();
         // Assert
@@ -33,7 +19,7 @@ public class ToDoStateTests
     public void Test_ToDoingtState()
     {
         // Arrange
-        var backlogItem = CreateBacklogItem();
+        var backlogItem = GlobalUsings.CreateBacklogItem();
         // Act
         backlogItem.ToDoing();
         // Assert
@@ -44,7 +30,7 @@ public class ToDoStateTests
     public void Test_ToReadyForTestingState()
     {
         // Arrange
-        var backlogItem = CreateBacklogItem();
+        var backlogItem = GlobalUsings.CreateBacklogItem();
         // Act
         backlogItem.ToReadyForTesting();
         // Assert
@@ -55,7 +41,7 @@ public class ToDoStateTests
     public void Test_ToTestingState()
     {
         // Arrange
-        var backlogItem = CreateBacklogItem();
+        var backlogItem = GlobalUsings.CreateBacklogItem();
         // Act
         backlogItem.ToTesting();
         // Assert
@@ -66,7 +52,7 @@ public class ToDoStateTests
     public void Test_ToTestedState()
     {
         // Arrange
-        var backlogItem = CreateBacklogItem();
+        var backlogItem = GlobalUsings.CreateBacklogItem();
         // Act
         backlogItem.ToTested();
         // Assert
@@ -77,7 +63,7 @@ public class ToDoStateTests
     public void Test_ToDoneState()
     {
         // Arrange
-        var backlogItem = CreateBacklogItem();
+        var backlogItem = GlobalUsings.CreateBacklogItem();
         // Act
         backlogItem.ToDone();
         // Assert

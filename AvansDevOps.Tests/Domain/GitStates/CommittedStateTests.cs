@@ -2,16 +2,6 @@ namespace AvansDevOps.Tests.Domain.GitStates;
 
 public class CommittedStateTests
 {
-    public Dictionary<string, List<string>> CreateCommits()
-    {
-        return new Dictionary<string, List<string>>()
-        {
-            {"commit1", new List<string>(){"code1", "code2"}},
-            {"commit2", new List<string>(){"code3", "code4"}},
-            {"commit3", new List<string>(){"code5", "code6"}},
-        };
-    }
-
     [Fact]
     public void Test_ToStateNoGit()
     {
@@ -29,7 +19,7 @@ public class CommittedStateTests
     public void Test_ToStateAdded()
     {
         // Arrange
-        var state = new CommittedState(CreateCommits());
+        var state = new CommittedState(GlobalUsings.CreateCommits());
 
         // Act
         var result = state.ToStateAdded("codesnippet");
@@ -47,7 +37,7 @@ public class CommittedStateTests
     public void Test_ToStateCommitted()
     {
         // Arrange
-        var state = new CommittedState(CreateCommits());
+        var state = new CommittedState(GlobalUsings.CreateCommits());
 
         // Act
         var result = state.ToStateCommitted("commitmessage");
@@ -56,22 +46,24 @@ public class CommittedStateTests
         Assert.Equal(state, result);
     }
 
-    //[Fact]
-    //public void Test_ToStateNoGitByPush()
-    //{
-    //    // Arrange
-    //    var state = new CommittedState(CreateCommits());
-    //    // Act
-    //    var result = state.ToStateNoGitByPush("workitemtitle", "branch");
-    //    // Assert
-    //    Assert.IsType<NoGitState>(result);
-    //}
+    [Fact]
+    public void Test_ToStateNoGitByPush()
+    {
+        // Arrange
+        var state = new CommittedState(GlobalUsings.CreateCommits());
+
+        // Act
+        var result = state.ToStateNoGitByPush("workitemtitle", "branch");
+
+        // Assert
+        Assert.IsType<NoGitState>(result);
+    }
 
     [Fact]
     public void Test_SwitchBranch()
     {
         // Arrange
-        var state = new CommittedState(CreateCommits());
+        var state = new CommittedState(GlobalUsings.CreateCommits());
 
         // Act
         var result = state.SwitchBranch("branch");

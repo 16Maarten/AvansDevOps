@@ -31,27 +31,37 @@ public class ThreadTests
         Assert.DoesNotContain(reply, thread.Replies);
     }
 
-    //[Fact]
-    //public void Test_ToStringWithoutNested()
-    //{
-    //    // Arrange
-    //    var thread = GlobalUsings.CreateThread();
-    //    // Act
-    //    var result = thread.ToStringWithoutNested();
-    //    // Assert
-    //    Assert.Equal("------------\nThread: \"title\"\n------------\n", result);
-    //}
+    [Fact]
+    public void Test_ToStringWithoutNested()
+    {
+        // Arrange
+        var thread = GlobalUsings.CreateThread();
+        // Act
+        var result = thread.ToStringWithoutNested();
+        // Assert
+        using (new AssertionScope())
+        {
+            Assert.Contains($"------------\nThread: \"{thread._title}\"\n------------\n", result);
+            Assert.Contains($"message", result);
+            Assert.Contains($"developer", result);
+        }
+    }
 
-    //[Fact]
-    //public void Test_ToString()
-    //{
-    //    // Arrange
-    //    var thread = GlobalUsings.CreateThread();
-    //    // Act
-    //    var result = thread.ToString();
-    //    // Assert
-    //    Assert.Equal("------------\nThread: \"title\"\n------------\n", result);
-    //}
+    [Fact]
+    public void Test_ToString()
+    {
+        // Arrange
+        var thread = GlobalUsings.CreateThread();
+        // Act
+        var result = thread.ToString();
+        // Assert
+        using (new AssertionScope())
+        {
+            Assert.Contains($"------------\nThread: \"{thread._title}\"\n------------\n", result);
+            Assert.Contains($"message", result);
+            Assert.Contains($"developer", result);
+        }
+    }
 
     [Fact]
     public void Test_AddReply_ItemIsDoneState()
