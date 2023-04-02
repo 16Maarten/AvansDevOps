@@ -9,8 +9,12 @@ namespace AvansDevOps.App.Infrastructure.Services;
 public class NotificationService : ISubscriber
 {
     private INotifier _notifier { get; set; }
-
-    public void Update(string message, Person[] userList)
+    public INotifier Notifier
+    {
+        get { return _notifier; }
+        set { _notifier = value; }
+    }
+    public bool Update(string message, Person[] userList)
     {
         foreach (var user in userList)
         {
@@ -27,5 +31,7 @@ public class NotificationService : ISubscriber
                 _notifier.SendNotification(message, user);
             }
         }
+
+        return true;
     }
 }

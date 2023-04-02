@@ -5,21 +5,21 @@ namespace AvansDevOps.App.Infrastructure.Services;
 
 public class PublisherService
 {
-    private List<ISubscriber> _subscribers = new List<ISubscriber>();
+    public List<ISubscriber> Subscribers { get; private set; } = new List<ISubscriber>();
 
     public void AddObserver(ISubscriber subscriber)
     {
-        _subscribers.Add(subscriber);
+        Subscribers.Add(subscriber);
     }
 
-    public void DeleteObserver(ISubscriber subscriber)
+    public void RemoveObserver(ISubscriber subscriber)
     {
-        _subscribers.Remove(subscriber);
+        Subscribers.Remove(subscriber);
     }
 
     public void NotifyObservers(string message, params Person[] userList)
     {
-        foreach (var subscriber in _subscribers)
+        foreach (var subscriber in Subscribers)
         {
             subscriber.Update(message, userList);
         }
