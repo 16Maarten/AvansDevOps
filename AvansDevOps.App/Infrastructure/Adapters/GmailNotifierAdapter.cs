@@ -7,6 +7,11 @@ namespace AvansDevOps.App.Infrastructure.Adapters;
 public class GmailNotifierAdapter : INotifier
 {
     private GmailNotifier _notifier = new GmailNotifier();
+    public GmailNotifier Notifier
+    {
+        get { return _notifier; }
+        set { _notifier = value; }
+    }
     public void SendNotification(string message, Person user)
     {
         _notifier.PushEmail(message, user);

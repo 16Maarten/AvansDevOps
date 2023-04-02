@@ -29,4 +29,8 @@
     <ProjectReference Include="..\AvansDevOps.App\AvansDevOps.App.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\Services\" />
+  </ItemGroup>
+
 </Project>

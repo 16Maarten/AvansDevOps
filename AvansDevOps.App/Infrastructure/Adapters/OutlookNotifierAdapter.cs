@@ -7,6 +7,12 @@ namespace AvansDevOps.App.Infrastructure.Adapters;
 public class OutlookNotifierAdapter : INotifier
 {
     private OutlookNotifier _notifier = new OutlookNotifier();
+    public OutlookNotifier Notifier
+    {
+        get { return _notifier; }
+        set { _notifier = value; }
+    }
+
     public void SendNotification(string message, Person user)
     {
         _notifier.EmailSendOut(message, user);

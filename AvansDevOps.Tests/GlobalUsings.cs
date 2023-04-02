@@ -6,6 +6,7 @@ global using AvansDevOps.App.Domain.Users;
 global using AvansDevOps.App.Domain.WorkItemStates;
 global using AvansDevOps.App.DomainServices;
 global using AvansDevOps.App.DomainServices.FactoryInterfaces;
+global using AvansDevOps.App.Infrastructure.Adapters;
 global using AvansDevOps.App.Infrastructure.Builders;
 global using AvansDevOps.App.Infrastructure.Factories;
 global using AvansDevOps.App.Infrastructure.Visitors;
@@ -14,6 +15,7 @@ global using Moq;
 global using System.Drawing;
 global using Xunit;
 global using Thread = AvansDevOps.App.Domain.Thread;
+using AvansDevOps.App.Infrastructure.Notifiers;
 
 public class GlobalUsings
 {
@@ -99,5 +101,23 @@ public class GlobalUsings
             .Setup(x => x.Update(It.IsAny<string>(), It.IsAny<Person[]>()));
 
         return subscriberMock;
+    }
+
+    public static Mock<GmailNotifier> CreateGmailNotifierMock()
+    {
+        var gmailNotifierMock = new Mock<GmailNotifier>();
+        gmailNotifierMock
+            .Setup(x => x.PushEmail(It.IsAny<string>(), It.IsAny<Person>()));
+
+        return gmailNotifierMock;
+    }
+
+    public static Mock<OutlookNotifier> CreateOutlookNotifierMock()
+    {
+        var outlookNotifierMock = new Mock<OutlookNotifier>();
+        outlookNotifierMock
+            .Setup(x => x.EmailSendOut(It.IsAny<string>(), It.IsAny<Person>()));
+
+        return outlookNotifierMock;
     }
 }
