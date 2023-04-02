@@ -9,7 +9,7 @@ namespace AvansDevOps.App.Infrastructure.Printers;
 
 public class PdfPrinter : IPrinter
 {
-    public void Print(string report)
+    public bool Print(string report)
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         PdfDocument document = new PdfDocument();
@@ -22,5 +22,7 @@ public class PdfPrinter : IPrinter
 
         string filename = $"../../../Exports/report-{DateTime.Now.ToLongDateString()}.pdf";
         document.Save(filename);
+
+        return true;
     }
 }

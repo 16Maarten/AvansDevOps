@@ -24,7 +24,6 @@ public class Thread : Responsive
     {
         if (ItemIsNotDoneState()) base.AddReply(reply);
         _publisherService.NotifyObservers($"NEW MESSAGE FOR THREAD {_title}\n[{reply.Person.Name}] - {reply.Message}\n{reply.DateTime.ToLongDateString()}");
-
     }
 
     public override void RemoveReply(Reply reply)

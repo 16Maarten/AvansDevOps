@@ -69,8 +69,10 @@ public class SprintTests
         var developer = new Developer("developer");
         var backlogItem = new BacklogItem(1, "story", "story 1", developer, 1);
         sprint.AddComponent(backlogItem);
+
         // Act
         var result = sprint.GetStoryPointsDeveloper(developer);
+
         // Assert
         Assert.Equal(1, result);
     }

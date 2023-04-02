@@ -2,5 +2,5 @@
 
 public interface IPrinter
 {
-    void Print(string report);
+    bool Print(string report);
 }

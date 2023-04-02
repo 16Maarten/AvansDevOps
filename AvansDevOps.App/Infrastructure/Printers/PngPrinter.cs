@@ -8,7 +8,7 @@ namespace AvansDevOps.App.Infrastructure.Printers;
 
 public class PngPrinter : IPrinter
 {
-    public void Print(string report)
+    public bool Print(string report)
     {
         Image img = new Bitmap(1, 1);
         Graphics drawing = Graphics.FromImage(img);
@@ -30,5 +30,7 @@ public class PngPrinter : IPrinter
 
         textBrush.Dispose();
         drawing.Dispose();
+
+        return true;
     }
 }
