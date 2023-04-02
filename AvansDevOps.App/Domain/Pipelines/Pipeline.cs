@@ -4,13 +4,8 @@ namespace AvansDevOps.App.Domain.Pipelines;
 // TEMPLATE PATTERN
 public abstract class Pipeline
 {
-    private PublisherService _publisher;
     public bool PipelineIsCancelled { get; private set; } = false;
 
-    public Pipeline()
-    {
-        _publisher = new PublisherService();
-    }
     public bool TemplateMethod()
     {
         return Source() && Package() && Build() && Test() && Hook();

@@ -2,7 +2,7 @@
 using AvansDevOps.App.Infrastructure.Printers;
 
 namespace AvansDevOps.App.Domain;
-// STRATEGY PATTERN (_printer)
+// STRATEGY PATTERN// STRATEGY PATTERN (_printer)
 public class Report
 {
     private string _report { get; set; }

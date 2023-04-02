@@ -7,17 +7,17 @@ namespace AvansDevOps.App.Domain;
 
 public class Thread : Responsive
 {
-    public string _title { get; private set; }
+    public string Title { get; private set; }
     public BacklogItem BacklogItem { get; set; }
     private ICollection<Developer> _developers { get; set; }
-    public PublisherService _publisherService { get; private set; } = new PublisherService();
+    public PublisherService PublisherService { get; private set; } = new PublisherService();
 
     public Thread(string title, string message, Person person, BacklogItem BacklogItem, ICollection<Developer> developers) : base(message, person)
     {
-        _title = title;
+        Title = title;
         this.BacklogItem = BacklogItem;
         _developers = developers;
-        _publisherService.AddObserver(new NotificationService());
+        PublisherService.AddObserver(new NotificationService());
     }
 
     public override void AddReply(Reply reply)
@@ -25,7 +25,7 @@ public class Thread : Responsive
         if (ItemIsNotDoneState())
         {
             base.AddReply(reply);
-            _publisherService.NotifyObservers($"NEW MESSAGE FOR THREAD {_title}\n[{reply.Person.Name}] - {reply.Message}\n{reply.DateTime.ToLongDateString()}");
+            PublisherService.NotifyObservers($"NEW MESSAGE FOR THREAD {Title}\n[{reply.Person.Name}] - {reply.Message}\n{reply.DateTime.ToLongDateString()}", _developers.ToArray());
         }
 
     }
@@ -37,12 +37,12 @@ public class Thread : Responsive
 
     public override string ToStringWithoutNested()
     {
-        return $"------------\nThread: \"{_title}\"\n------------\n{base.ToStringWithoutNested()}";
+        return $"------------\nThread: \"{Title}\"\n------------\n{base.ToStringWithoutNested()}";
     }
 
     public override string ToString()
     {
-        return $"------------\nThread: \"{_title}\"\n------------\n{base.ToString()}";
+        return $"------------\nThread: \"{Title}\"\n------------\n{base.ToString()}";
     }
 
     public bool ItemIsNotDoneState()

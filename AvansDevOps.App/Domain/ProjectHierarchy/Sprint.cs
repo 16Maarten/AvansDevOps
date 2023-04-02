@@ -4,7 +4,8 @@ using AvansDevOps.App.Infrastructure.Services;
 using AvansDevOps.App.Infrastructure.Visitors;
 
 namespace AvansDevOps.App.Domain.ProjectHierarchy;
-
+// OBSERVABLE PATTERN
+// STRATEGY PATTERN
 public abstract class Sprint : Composite
 {
     public int Id { get; set; }
@@ -15,6 +16,7 @@ public abstract class Sprint : Composite
     public ScrumMaster ScrumMaster { get; set; }
     public ICollection<Developer> Developers { get; set; }
     public Pipeline Pipeline { get; private set; } = new TestPipeline();
+    public Report Report { get; set; }
     public PublisherService PublisherService = new PublisherService();
     public bool PipelineRunning { get; set; } = false;
 

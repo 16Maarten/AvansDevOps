@@ -10,7 +10,7 @@ public class ThreadTests
         var reply = GlobalUsings.CreateReply();
         var subscriberMock = GlobalUsings.CreateSubscriberMock();
 
-        thread._publisherService.AddObserver(subscriberMock.Object);
+        thread.PublisherService.AddObserver(subscriberMock.Object);
 
         // Act
         thread.AddReply(reply);
@@ -19,7 +19,7 @@ public class ThreadTests
         using (new AssertionScope())
         {
             Assert.Contains(reply, thread.Replies);
-            subscriberMock.Verify(x => x.Update(It.Is<string>(x => x.Contains($"NEW MESSAGE FOR THREAD {thread._title}\n[{reply.Person.Name}] - {reply.Message}")), It.IsAny<Person[]>()), Times.Once);
+            subscriberMock.Verify(x => x.Update(It.Is<string>(x => x.Contains($"NEW MESSAGE FOR THREAD {thread.Title}\n[{reply.Person.Name}] - {reply.Message}")), It.IsAny<Person[]>()), Times.Once);
         }
     }
 
@@ -50,7 +50,7 @@ public class ThreadTests
         // Assert
         using (new AssertionScope())
         {
-            Assert.Contains($"------------\nThread: \"{thread._title}\"\n------------\n", result);
+            Assert.Contains($"------------\nThread: \"{thread.Title}\"\n------------\n", result);
             Assert.Contains($"message", result);
             Assert.Contains($"developer", result);
         }
@@ -68,7 +68,7 @@ public class ThreadTests
         // Assert
         using (new AssertionScope())
         {
-            Assert.Contains($"------------\nThread: \"{thread._title}\"\n------------\n", result);
+            Assert.Contains($"------------\nThread: \"{thread.Title}\"\n------------\n", result);
             Assert.Contains($"message", result);
             Assert.Contains($"developer", result);
         }
