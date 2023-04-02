@@ -5,7 +5,7 @@ namespace AvansDevOps.App.Infrastructure.Builders
 {
     public class ProjectBuilder : IBuilder
     {
-        private Project Project { get; set; }
+        private Project _project { get; set; }
 
         public void BuildProject(Project project)
         {
