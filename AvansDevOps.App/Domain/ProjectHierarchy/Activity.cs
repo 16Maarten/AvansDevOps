@@ -53,7 +53,6 @@ public class Activity : Component, IWorkItem
 
     public void ToDone()
     {
-        // TODO Check of alle activiteiten op done staan
         SprintBoardState = SprintBoardState.ToStateDone();
     }
 
