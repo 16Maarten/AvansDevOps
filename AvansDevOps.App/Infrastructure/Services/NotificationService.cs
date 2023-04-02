@@ -5,12 +5,16 @@ using AvansDevOps.App.Infrastructure.Adapters;
 using AvansDevOps.App.Infrastructure.Notifiers;
 
 namespace AvansDevOps.App.Infrastructure.Services;
-
+// STRATEGY PATTERN (met afhankelijkheid naar concrete klassen, moest vanwege verschille media-types)
 public class NotificationService : ISubscriber
 {
     private INotifier _notifier { get; set; }
-
-    public void Update(string message, Person[] userList)
+    public INotifier Notifier
+    {
+        get { return _notifier; }
+        set { _notifier = value; }
+    }
+    public bool Update(string message, Person[] userList)
     {
         foreach (var user in userList)
         {
@@ -27,5 +31,7 @@ public class NotificationService : ISubscriber
                 _notifier.SendNotification(message, user);
             }
         }
+
+        return true;
     }
 }

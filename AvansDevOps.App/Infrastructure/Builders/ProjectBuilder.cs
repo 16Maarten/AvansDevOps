@@ -1,6 +1,6 @@
 ﻿using AvansDevOps.App.Domain.ProjectHierarchy;
 using AvansDevOps.App.DomainServices;
-
+// BUILDER PATTERN
 namespace AvansDevOps.App.Infrastructure.Builders
 {
     public class ProjectBuilder : IBuilder
@@ -9,12 +9,12 @@ namespace AvansDevOps.App.Infrastructure.Builders
 
         public void BuildProject(Project project)
         {
-            Project = project;
+            _project = project;
         }
 
         public Project GetResult()
         {
-            return Project;
+            return _project;
         }
 
         public void SetActivitys(int BacklogItemId, int SprintId, ICollection<Activity> activities)
@@ -51,14 +51,14 @@ namespace AvansDevOps.App.Infrastructure.Builders
         {
             foreach (Sprint sprint in sprints)
             {
-                Project.AddComponent(sprint);
-                sprint.SetParent(Project);
+                _project.AddComponent(sprint);
+                sprint.SetParent(_project);
             }
         }
 
         private Sprint findSprint(int SprintId)
         {
-            var sprints = Project.GetChildren().Cast<Sprint>().ToList();
+            var sprints = _project.GetChildren().Cast<Sprint>().ToList();
             if (sprints.Count > 0)
             {
                 return sprints.Find(s => s.Id == SprintId);

@@ -13,9 +13,11 @@ public class BuilderTests
         // Arrange
         var project = new Project("project", new ProductOwner("product", "product owner"));
         var builder = CreateBuilder();
+
         // Act
         builder.BuildProject(project);
         var buildProject = builder.GetResult();
+
         // Assert
         Assert.Equal(project, buildProject);
     }
@@ -39,9 +41,11 @@ public class BuilderTests
             developers
         );
         sprints.Add(sprint);
+
         // Act
         builder.SetSprints(sprints);
         var buildProject = builder.GetResult();
+
         // Assert
         Assert.Equal(sprints, buildProject.GetChildren().Cast<Sprint>().ToList());
     }
@@ -69,10 +73,12 @@ public class BuilderTests
         var backlogItems = new List<BacklogItem>();
         var backlogItem = new BacklogItem(1, "story", "story 1", dev, 5);
         backlogItems.Add(backlogItem);
+
         // Act
         builder.SetSprints(sprints);
         builder.SetBacklogItems(1, backlogItems);
         var buildProject = builder.GetResult();
+
         // Assert
         var assertSPrint = (Sprint)buildProject.GetComponent(0);
         Assert.Equal(backlogItems, assertSPrint.GetChildren().Cast<BacklogItem>().ToList());
@@ -106,11 +112,13 @@ public class BuilderTests
         var activity2 = new Activity(2, "home pagina", "Maak een home pagina", dev, 3);
         activities.Add(activity1);
         activities.Add(activity2);
+
         // Act
         builder.SetSprints(sprints);
         builder.SetBacklogItems(1, backlogItems);
         builder.SetActivitys(1, 1, activities);
         var buildProject = builder.GetResult();
+
         // Assert
         var assertSprint = (Sprint)buildProject.GetComponent(0);
         var assertBacklogitem = (BacklogItem)assertSprint.GetComponent(0);

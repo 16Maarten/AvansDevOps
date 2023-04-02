@@ -9,6 +9,7 @@ global using AvansDevOps.App.DomainServices.FactoryInterfaces;
 global using AvansDevOps.App.Infrastructure.Adapters;
 global using AvansDevOps.App.Infrastructure.Builders;
 global using AvansDevOps.App.Infrastructure.Factories;
+global using AvansDevOps.App.Infrastructure.Services;
 global using AvansDevOps.App.Infrastructure.Visitors;
 global using FluentAssertions.Execution;
 global using Moq;

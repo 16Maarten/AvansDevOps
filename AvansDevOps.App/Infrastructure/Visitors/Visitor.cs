@@ -1,5 +1,5 @@
 ﻿using AvansDevOps.App.Domain.ProjectHierarchy;
-
+// VISITOR PATTERN
 namespace AvansDevOps.App.Infrastructure.Visitors
 {
     public abstract class Visitor

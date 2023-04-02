@@ -4,5 +4,5 @@ namespace AvansDevOps.App.DomainServices;
 
 public interface ISubscriber
 {
-    void Update(string message, Person[] userList);
+    bool Update(string message, Person[] userList);
 }

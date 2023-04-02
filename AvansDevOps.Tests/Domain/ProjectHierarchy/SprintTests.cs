@@ -93,13 +93,16 @@ public class SprintTests
     [Fact]
     public void Test_GetStoryPointsDeveloper2()
     {
+        // Arrange
         var sprint = GlobalUsings.CreateReleaseSprint();
         var developer = new Developer("developer");
         var backlogItem = new BacklogItem(1, "story", "story 1", developer, 5);
         backlogItem.AddComponent(new Activity(1, "story", "story 2", developer, 3));
         sprint.AddComponent(backlogItem);
+
         // Act
         var result = sprint.GetStoryPointsDeveloper(developer);
+
         // Assert
         Assert.Equal(8, result);
     }
@@ -109,8 +112,10 @@ public class SprintTests
     {
         // Arrange
         var sprint = GlobalUsings.CreateReleaseSprint();
+
         // Act
         var result = sprint.IsSprintFinished();
+
         // Assert
         Assert.False(result);
     }
@@ -121,8 +126,10 @@ public class SprintTests
         // Arrange
         var sprint = GlobalUsings.CreateReleaseSprint();
         sprint.EndDate = DateTime.Now.AddDays(-10);
+
         // Act
         var result = sprint.IsSprintFinished();
+
         // Assert
         Assert.True(result);
         Assert.Equal(Status.Finished, sprint.Status);

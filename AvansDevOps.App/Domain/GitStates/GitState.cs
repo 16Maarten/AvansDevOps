@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace AvansDevOps.App.Domain.GitStates;
-
+// STATE PATTERN
 public abstract class GitState
 {
     public List<string> AddedChanges = new List<string>();

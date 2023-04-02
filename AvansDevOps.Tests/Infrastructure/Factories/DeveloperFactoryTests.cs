@@ -13,8 +13,10 @@ public class DeveloperFactoryTests
         // Arrange
         var factory = CreateFactory();
         Developer dev = new Developer("Dev");
+
         // Act
         var result = factory.Create(dev);
+
         // Assert
         Assert.True(result);
     }
@@ -25,8 +27,10 @@ public class DeveloperFactoryTests
         // Arrange
         var factory = CreateFactory();
         Developer dev = new Developer("Dev");
+
         // Act
         var result = factory.Update(dev);
+
         // Assert
         Assert.True(result);
     }
@@ -37,8 +41,10 @@ public class DeveloperFactoryTests
         // Arrange
         var factory = CreateFactory();
         Developer dev = new Developer("Dev");
+
         // Act
         var result = factory.Delete(dev);
+
         // Assert
         Assert.True(result);
     }
@@ -49,8 +55,10 @@ public class DeveloperFactoryTests
         // Arrange
         var factory = CreateFactory();
         Developer dev = new Developer("Dev");
+
         // Act
         var result = factory.Find(1);
+
         // Assert
         Assert.Equal(result.Name, dev.Name);
     }
@@ -60,8 +68,10 @@ public class DeveloperFactoryTests
     {
         // Arrange
         var factory = CreateFactory();
+
         // Act
         var result = factory.FindAll();
+
         // Assert
         Assert.Empty(result);
     }

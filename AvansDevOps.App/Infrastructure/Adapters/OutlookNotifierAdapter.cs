@@ -3,7 +3,7 @@ using AvansDevOps.App.DomainServices;
 using AvansDevOps.App.Infrastructure.Notifiers;
 
 namespace AvansDevOps.App.Infrastructure.Adapters;
-
+// ADAPTER PATTERN
 public class OutlookNotifierAdapter : INotifier
 {
     private OutlookNotifier _notifier = new OutlookNotifier();

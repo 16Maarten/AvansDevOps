@@ -1,7 +1,7 @@
 ﻿using AvansDevOps.App.Domain.ProjectHierarchy;
 
 namespace AvansDevOps.App.DomainServices;
-
+// BUILDER PATTERN
 public interface IBuilder
 {
     public void BuildProject(Project project);

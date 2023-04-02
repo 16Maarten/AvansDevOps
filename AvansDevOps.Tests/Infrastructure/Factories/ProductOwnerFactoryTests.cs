@@ -13,8 +13,10 @@ public class ProductOwnerFactoryTests
         // Arrange
         var factory = CreateFactory();
         ProductOwner po = new ProductOwner("PO1", "Product");
+
         // Act
         var result = factory.Create(po);
+
         // Assert
         Assert.True(result);
     }
@@ -25,8 +27,10 @@ public class ProductOwnerFactoryTests
         // Arrange
         var factory = CreateFactory();
         ProductOwner po = new ProductOwner("PO1", "Product");
+
         // Act
         var result = factory.Update(po);
+
         // Assert
         Assert.True(result);
     }
@@ -37,8 +41,10 @@ public class ProductOwnerFactoryTests
         // Arrange
         var factory = CreateFactory();
         ProductOwner po = new ProductOwner("PO1", "Product");
+
         // Act
         var result = factory.Delete(po);
+
         // Assert
         Assert.True(result);
     }
@@ -49,8 +55,10 @@ public class ProductOwnerFactoryTests
         // Arrange
         var factory = CreateFactory();
         ProductOwner po = new ProductOwner("PO1", "Product");
+
         // Act
         var result = factory.Find(1);
+
         // Assert
         Assert.Equal(result.Name, po.Name);
     }
@@ -60,8 +68,10 @@ public class ProductOwnerFactoryTests
     {
         // Arrange
         var factory = CreateFactory();
+
         // Act
         var result = factory.FindAll();
+
         // Assert
         Assert.Empty(result);
     }
