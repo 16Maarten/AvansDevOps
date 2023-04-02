@@ -8,7 +8,7 @@ public class SprintTests
             1,
             "Sprint 1",
             DateTime.Now,
-            DateTime.Now,
+            DateTime.Now.AddDays(14),
             new ScrumMaster("ScrumMaster"),
             new List<Developer>()
         );
@@ -88,5 +88,69 @@ public class SprintTests
         var result = sprint.GetStoryPointsDeveloper(developer);
         // Assert
         Assert.Equal(8, result);
+    }
+
+    [Fact]
+    public void Test_IsSprintFinished1()
+    {
+        // Arrange
+        var sprint = CreateReleaseSprint();
+        // Act
+        var result = sprint.IsSprintFinished();
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void Test_IsSprintFinished2()
+    {
+        // Arrange
+        var sprint = CreateReleaseSprint();
+        sprint.EndDate = DateTime.Now.AddDays(-10);
+        // Act
+        var result = sprint.IsSprintFinished();
+        // Assert
+        Assert.True(result);
+        Assert.Equal(Status.Finished, sprint.Status);
+    }
+
+    //write test for method SprintSummary
+    [Fact]
+    public void Test_SprintSummary1()
+    {
+        // Arrange
+        var ScrumMaster = new ScrumMaster("ScrumMaster");
+        var sprint = new ReviewSprint(
+            1,
+            "Sprint 1",
+            DateTime.Now,
+            DateTime.Now.AddDays(14),
+            ScrumMaster,
+            new List<Developer>()
+        );
+        // Act
+        var result = sprint.CloseSprint("Sprint is goed gegaan", ScrumMaster);
+        // Assert
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void Test_SprintSummary2()
+    {
+        // Arrange
+        var ScrumMaster = new ScrumMaster("ScrumMaster");
+        var developer = new Developer("Dev");
+        var sprint = new ReviewSprint(
+            1,
+            "Sprint 1",
+            DateTime.Now,
+            DateTime.Now.AddDays(14),
+            ScrumMaster,
+            new List<Developer>()
+        );
+        // Act
+        var result = sprint.CloseSprint("Sprint is goed gegaan", developer);
+        // Assert
+        Assert.False(result);
     }
 }
