@@ -1,5 +1,6 @@
 global using AvansDevOps.App.Domain;
 global using AvansDevOps.App.Domain.GitStates;
+global using AvansDevOps.App.Domain.Pipelines;
 global using AvansDevOps.App.Domain.ProjectHierarchy;
 global using AvansDevOps.App.Domain.Users;
 global using AvansDevOps.App.Domain.WorkItemStates;
@@ -13,7 +14,6 @@ global using Moq;
 global using System.Drawing;
 global using Xunit;
 global using Thread = AvansDevOps.App.Domain.Thread;
-
 
 public class GlobalUsings
 {

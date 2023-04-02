@@ -5,7 +5,7 @@ namespace AvansDevOps.App.Domain.Pipelines;
 public abstract class Pipeline
 {
     private PublisherService _publisher;
-    private bool _isCancelled = false;
+    public bool PipelineIsCancelled { get; private set; } = false;
 
     public Pipeline()
     {
@@ -18,63 +18,71 @@ public abstract class Pipeline
 
     private bool Source()
     {
-        if (_isCancelled) return IsCancelled();
-        return true;
+        return PipelineAction();
     }
 
     private bool Package()
     {
-        if (_isCancelled) return IsCancelled();
-        return true;
+        return PipelineAction();
     }
 
     private bool Build()
     {
-        if (_isCancelled) return IsCancelled();
-        return true;
+        return PipelineAction();
     }
 
     private bool Test()
     {
-        if (_isCancelled) return IsCancelled();
-        return true;
+        return PipelineAction();
     }
     protected bool Analysis()
     {
-        if (_isCancelled) return IsCancelled();
-        return true;
+        return PipelineAction();
     }
 
     protected bool Deploy()
     {
-        if (_isCancelled) return IsCancelled();
-        return true;
+        return PipelineAction();
     }
 
     protected bool Utility()
     {
-        if (_isCancelled) return IsCancelled();
-        return true;
+        return PipelineAction();
     }
 
     public virtual bool Hook()
     {
-        if (_isCancelled) return IsCancelled();
-        return true;
+        return PipelineAction();
     }
 
     public void Cancel()
     {
-        _isCancelled = true;
+        PipelineIsCancelled = true;
     }
 
-    private bool IsCancelled()
+    public bool IsCancelled()
     {
-        _isCancelled = false;
+        PipelineIsCancelled = false;
         return false;
     }
     public void ResetCancel()
     {
-        _isCancelled = false;
+        PipelineIsCancelled = false;
+    }
+
+    private bool PipelineAction()
+    {
+        if (PipelineIsCancelled) return IsCancelled();
+
+        try
+        {
+            return true;
+        }
+        catch (Exception e)
+        {
+
+            Console.WriteLine(e.Message);
+            return false;
+        }
     }
 }
